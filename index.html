@@ -2,7 +2,27 @@
 <html>
 <head>
  <title>The Last Days · Nightly patches</title>
- <style>html{background:#322;color:#985; text-shadow:2px 1px black; font-family:;}</style>
+ <style>
+	html
+	{
+		background:#322;
+		color:#985;
+		text-shadow:2px 1px black;
+		font-family:;
+	}
+	
+	#lang li[lang]:before
+	{
+		content: "";
+		display: inline-block;
+		background-image: url(img/es.png);
+		width: 16px;
+		height: 11px;
+		margin-right: 5px;
+	}
+	
+	
+ </style>
 </head>
 <body>
  <h1>The Last Days nightly patches!</h1>
@@ -13,7 +33,7 @@
  <p>
   <h3>Included languages:</h3>
   <ul id=lang>
-     <li>English</li> <li>Castellano</li> <li>Français</li> <li>Deutsch</li> <li>Polski</li> <li><a href=https://transifex.com/projects/p/tld/>Want to contribute?</a></li>
+     <li lang=en>English</li> <li lang=es>Castellano</li> <li lang=fr>Français</li> <li lang=de>Deutsch</li> <li lang=pl>Polski</li> <li><a href=https://transifex.com/projects/p/tld/>Want to contribute?</a></li>
   </ul>
 
   <img src=https://www.transifex.com/projects/p/tld/resource/game_strings/chart/image_png />
@@ -25,8 +45,8 @@
 <table>
  <thead>
   <td>
-   <tr>Mount&Blade 1.011</tr>
-   <tr>Mount&Blade Warband</tr>
+   <tr>Mount&amp;Blade 1.011</tr>
+   <tr>Mount&amp;Blade Warband</tr>
   </td>
  </thead>
 
