@@ -11,6 +11,11 @@
     font-family:;
   }
   
+  .win
+  {
+    color:pink !important;
+  }
+  
   #lang li[lang]:before
   {
     content: "";
@@ -83,6 +88,11 @@
  </p>
 
 <h1>INSTRUCTIONS</h1>
+
+<label><input type=checkbox checked/> Mount&amp;Blade 1.011 </label>
+<label><input type=checkbox checked/> Mount&amp;Blade Warband </label>
+
+
 <table>
  <thead>
   <tr>
@@ -105,4 +115,16 @@ Latest nightly
   </tbody>
   </table>
  </body>
+ <script>
+ 
+  if(!!navigator.userAgent.match(/Windows/))
+    document.documentElement.classList.add("win");
+
+  if(!!navigator.userAgent.match(/Linux|BSD/))
+    document.documentElement.classList.add("nix");
+
+  if(!!navigator.userAgent.match(/Mac/))
+    document.documentElement.classList.add("mac");
+ 
+ </script>
 </html>
