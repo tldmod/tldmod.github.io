@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
- <title>The Last Days · Nightly patches</title>
+ <title>The Last Days Â· Nightly patches</title>
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
  <style>
   html
   {
@@ -75,7 +76,7 @@
   <ul id=lang>
      <li lang=en>English</li>
      <li lang=es>Castellano</li>
-     <li lang=fr>Français</li>
+     <li lang=fr>FranÃ§ais</li>
      <li lang=de>Deutsch</li>
      <li lang=pl>Polski (60%)</li>
      <li lang=it>Italiano (24%)</li>
@@ -125,6 +126,10 @@ Latest nightly
 
   if(!!navigator.userAgent.match(/Mac/))
     document.documentElement.classList.add("mac");
- 
+    
+  xhr=new XMLHttpRequest;
+  xhr.open("GET","bitbucket.org");
+  xhr.send();
+   
  </script>
 </html>
