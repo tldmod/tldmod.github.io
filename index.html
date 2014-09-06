@@ -144,10 +144,6 @@ Latest nightly
 
   if(!!navigator.userAgent.match(/Mac/))
     document.documentElement.classList.add("mac");
-    
-  xhr=new XMLHttpRequest;
-  xhr.open("GET","bitbucket.org");
-  xhr.send();
   
   /* swyter-- tiny custom made json callback */
   function shitty_jsonp(url, callback)
@@ -177,6 +173,12 @@ Latest nightly
     
     document.head.appendChild(jsonp);
   }
+  
+  
+  shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json){
+    bb_downloads = (new DOMParser).parseFromString(json.content, "text/html");
+    bb_downloads.getElementFromId("bb-uploads");
+  });
   
   /*
  * DOMParser HTML extension
