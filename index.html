@@ -9,7 +9,14 @@
     background:#322;
     color:#985;
     text-shadow:2px 1px black;
-    font-family:;
+    font-family:cursive;
+    
+            user-select:none;
+    -webkit-user-select:none;
+       -moz-user-select:none;
+         -o-user-select:none;
+         
+    cursor:default !important;
   }
   
   .win
@@ -85,7 +92,7 @@
      </li>
   </ul>
 
-  <img src=https://www.transifex.com/projects/p/tld/resource/game_strings/chart/image_png />
+  <img src=https://www.transifex.com/projects/p/tld/chart/image_png />
  </p>
 
 <h1>INSTRUCTIONS</h1>
@@ -130,6 +137,87 @@ Latest nightly
   xhr=new XMLHttpRequest;
   xhr.open("GET","bitbucket.org");
   xhr.send();
+  
+  
+  function shitty_jsonp(url, callback)
+  {
+  
+   // window.callback_lol = function(give_me)
+  //  {
+  //    window.cb=give_me;
+  //  }
+  
+    this.window.callback_lol = function(json)
+    {
+      if(typeof callback === "function")
+      {
+        callback.apply(arguments);
+      }
+      
+      document.head.removeChild(jsonp);
+      remove this.window.callback_lol;
+    };
+  
+    jsonp=document.createElement("script");
+    jsonp.setAttribute("src","http://www.whateverorigin.org/get?url="+url+"&callback=callback_lol");
+    
+    document.head.appendChild(jsonp);
+    
+    //while(typeof window.cb !== "object"){console.log("waiting")}
+    
+    //document.head.removeChild(jsonp);
+    //remove window.callback_lol();
+    
+    //return window.cb;
+  }
+  
+  /*
+ * DOMParser HTML extension
+ * 2012-09-04
+ * 
+ * By Eli Grey, http://eligrey.com
+ * Public domain.
+ * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+ */
+
+/*! @source https://gist.github.com/1129031 */
+/*global document, DOMParser*/
+
+(function(DOMParser) {
+	"use strict";
+
+	var
+	  DOMParser_proto = DOMParser.prototype
+	, real_parseFromString = DOMParser_proto.parseFromString
+	;
+
+	// Firefox/Opera/IE throw errors on unsupported types
+	try {
+		// WebKit returns null on unsupported types
+		if ((new DOMParser).parseFromString("", "text/html")) {
+			// text/html parsing is natively supported
+			return;
+		}
+	} catch (ex) {}
+
+	DOMParser_proto.parseFromString = function(markup, type) {
+		if (/^\s*text\/html\s*(?:;|$)/i.test(type)) {
+			var
+			  doc = document.implementation.createHTMLDocument("")
+			;
+	      		if (markup.toLowerCase().indexOf('<!doctype') > -1) {
+        			doc.documentElement.innerHTML = markup;
+      			}
+      			else {
+        			doc.body.innerHTML = markup;
+      			}
+			return doc;
+		} else {
+			return real_parseFromString.apply(this, arguments);
+		}
+	};
+}(DOMParser));
+
    
  </script>
 </html>
