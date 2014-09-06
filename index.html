@@ -1,5 +1,16 @@
 <!DOCTYPE HTML>
 <html>
+<script>
+  /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
+  for(elem in script=document.getElementsByTagName("script"))
+  {
+    if(typeof script[elem]==="object" && script[elem].innerText.match(/NR/))
+    {
+      console.log(script[elem].innerText.match(/NR/),typeof script[elem]);
+      script[elem].parentElement.removeChild(script[elem]);
+    }
+  }
+</script>
 <head>
  <title>The Last Days · Nightly patches</title>
  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -141,24 +152,30 @@ Latest nightly
   /* swyter-- tiny custom made json callback */
   function shitty_jsonp(url, callback)
   {
-    random_id = Math.random()*1e3|0;
+    random_id = "CB" + (new Date()|0);
     
-    this.window[] = function(json)
+    this.window[random_id] = function(json)
     {
       if(typeof callback === "function")
       {
         callback.apply(this, arguments);
       }
       
+      else
+      {
+        throw "you suck! a callback function soup is needed to run this!";
+      }
+      
       document.head.removeChild(jsonp);
-      //remove this.window.callback_lol;
+      delete window[random_id];
+      
+      console.log(this);
     };
   
     jsonp=document.createElement("script");
-    jsonp.setAttribute("src","http://www.whateverorigin.org/get?url="+url+"&callback=callback_lol");
+    jsonp.setAttribute("src","http://www.whateverorigin.org/get?url="+url+"&callback="+random_id);
     
     document.head.appendChild(jsonp);
-    
   }
   
   /*
