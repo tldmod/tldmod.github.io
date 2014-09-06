@@ -138,24 +138,20 @@ Latest nightly
   xhr.open("GET","bitbucket.org");
   xhr.send();
   
-  
+  /* swyter-- tiny custom made json callback */
   function shitty_jsonp(url, callback)
   {
-  
-   // window.callback_lol = function(give_me)
-  //  {
-  //    window.cb=give_me;
-  //  }
-  
-    this.window.callback_lol = function(json)
+    random_id = Math.random()*1e3|0;
+    
+    this.window[] = function(json)
     {
       if(typeof callback === "function")
       {
-        callback.apply(arguments);
+        callback.apply(this, arguments);
       }
       
       document.head.removeChild(jsonp);
-      remove this.window.callback_lol;
+      //remove this.window.callback_lol;
     };
   
     jsonp=document.createElement("script");
@@ -163,12 +159,6 @@ Latest nightly
     
     document.head.appendChild(jsonp);
     
-    //while(typeof window.cb !== "object"){console.log("waiting")}
-    
-    //document.head.removeChild(jsonp);
-    //remove window.callback_lol();
-    
-    //return window.cb;
   }
   
   /*
