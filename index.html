@@ -67,7 +67,7 @@
     //color:pink !important;
   }
   
-  li
+  ul li
   {
     list-style-type: circle;
   }
@@ -179,33 +179,40 @@
 
 <h1>INSTRUCTIONS</h1>
 
-<label id=mab1011><input name=dummy type=radio checked /> <span>Mount&amp;Blade 1.011</span> </label>
-<label id=warband><input name=dummy type=radio         /> <span>Mount&amp;Blade Warband</span> </label>
+<label id=mab1011>
+  <input id=mb name=dummy type=radio checked />
+  <span>Mount&amp;Blade 1.011</span>
+</label>
+<label id=warband>
+  <input id=wb name=dummy type=radio />
+  <span>Mount&amp;Blade Warband</span>
+</label>
+
+<div id=warband_instructions>
+  <ol>
+  <li>Latest standalone version of the mod - TLD_3.3.7z
+  Download from Bitbucket or ModDB</li>
 
 
-<table>
- <thead>
-  <tr>
-   <td>Mount&amp;Blade 1.011</tr>
-   <td>Mount&amp;Blade Warband</tr>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-1. Latest standalone version of the mod - TLD_3.3.7z
-Download from Bitbucket or ModDB
-</td>
-</tr>
+  <li>Warband compatibility patch. - TLD_3.3_wbcompat.7z
+  Download from Bitbucket or ModDB
 
-Warband compatibility patch. - TLD_3.3_wbcompat.7z
-Download from Bitbucket or ModDB
+  Latest nightly
 
-Latest nightly
-  </tbody>
-  </table>
+  (see more)</li>
+  </ol>
+</div>
+
  </body>
  <script>
+ 
+ window.onchange=function(e)
+ {
+    localStorage["selected_instruction"] = e.srcElement.id;
+    console.log(e);
+ }
+ 
+ document.getElementById(localStorage["selected_instruction"]).checked = true;
  
   if(!!navigator.userAgent.match(/Windows/))
     document.documentElement.classList.add("win");
@@ -246,10 +253,10 @@ Latest nightly
   }
   
   
-  shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json){
+  /*shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json){
     bb_downloads = (new DOMParser).parseFromString(json.content, "text/html");
     bb_downloads.getElementFromId("bb-uploads");
-  });
+  }); */
   
 /*
  * DOMParser HTML extension
