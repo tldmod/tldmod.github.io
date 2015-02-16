@@ -146,6 +146,15 @@
     background-image: url(http://www.mbrepository.com/images/download.gif);
     background-repeat: no-repeat;
   }
+  
+  .if_wb if_mb
+  {
+    display: none;
+  }
+  .if_mb if_wb
+  {
+    display: none;
+  }
  </style>
 </head>
 <body>
@@ -175,7 +184,7 @@
 <h1>INSTRUCTIONS</h1>
 
 <label id=mab1011>
-  <input id=mb name=dummy type=radio checked />
+  <input id=mb name=dummy type=radio />
   <span>Mount&amp;Blade 1.011</span>
 </label>
 <label id=warband>
@@ -193,18 +202,19 @@
       </span>
     </li>
 
-
+    <if_wb>
     <li>
-      Warband compatibility patch. - <em>TLD_3.3_wbcompat.7z</em>
+     Warband compatibility patch. - <em>TLD_3.3_wbcompat.7z</em>
       <span>
         Download from
         <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat.7z>Bitbucket</a> or
         <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33-warband-patch#subheader>ModDB</a>.
       </span>
     </li>
+    </if_wb>
 
     <li>
-      Latest nightly patch for Warband (from <em>2014/10/03</em>)
+      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <em>2014/10/03</em>)
       <span>
         Download from
         <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2014.10.03-14.27_r2034.7z>Bitbucket</a> 
@@ -223,10 +233,13 @@
  window.onchange=function(e)
  {
     localStorage["selected_instruction"] = e.srcElement.id;
-    console.log(e);
+    
+    document.documentElement.classList.add(e.srcElement.id=="wb" ? "if_wb" : "if_mb");
+    document.documentElement.classList.remove(e.srcElement.id=="wb" ? "if_mb": "if_wb");
  }
  
- document.getElementById(localStorage["selected_instruction"]).checked = true;
+ document.getElementById(localStorage["selected_instruction"] || "mb").click();
+ 
  
   if(!!navigator.userAgent.match(/Windows/))
     document.documentElement.classList.add("win");
