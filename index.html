@@ -14,6 +14,7 @@
 <head>
  <title>The Last Days · Nightly patches</title>
  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css' />
  <style>
   html
   {
@@ -28,11 +29,28 @@
          -o-user-select:none;
          
     cursor:default !important;
+    font-family: 'Merriweather';
+    
+    background-image: url(http://media.moddb.com/images/members/1/551/550824/swyTLDprofile.bg.jpg);
+    background-position:0 -400px;
+    height:100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  body
+  {
+    width:650px;
+    height:100%;
+    margin:0 auto;
+    background-color: rgba(0,0,0,0.2);
+    padding:25px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, .9);
   }
   
   .win
   {
-    color:pink !important;
+    //color:pink !important;
   }
   
   #lang li[lang]:before
@@ -102,8 +120,6 @@
       <a href=https://transifex.com/projects/p/tld/>Want to contribute?</a>
      </li>
   </ul>
-
-  <img src=https://www.transifex.com/projects/p/tld/chart/image_png />
  </p>
 
 <h1>INSTRUCTIONS</h1>
@@ -148,7 +164,7 @@ Latest nightly
   /* swyter-- tiny custom made json callback */
   function shitty_jsonp(url, callback)
   {
-    random_id = "CB" + (new Date()|0);
+    random_id = "CB" + (+new Date());
     
     this.window[random_id] = function(json)
     {
@@ -163,7 +179,7 @@ Latest nightly
       }
       
       document.head.removeChild(jsonp);
-      delete window[random_id];
+      delete callee;
       
       console.log(this);
     };
@@ -180,7 +196,7 @@ Latest nightly
     bb_downloads.getElementFromId("bb-uploads");
   });
   
-  /*
+/*
  * DOMParser HTML extension
  * 2012-09-04
  * 
