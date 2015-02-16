@@ -115,6 +115,42 @@
     margin: 0;
   }
   
+  
+  
+  
+  #mab1011, #warband
+  {
+    display: inline-block;
+    background-repeat: no-repeat;
+    padding-left: 36px;
+    height: 32px;
+  }
+  
+  #mab1011
+  {
+    background-image: url(http://media.moddb.com/images/games/1/1/146/icon.png);
+  }
+  
+  #warband
+  {
+    background-image: url(http://media.moddb.com/images/games/1/14/13649/icon.1.png);
+  }
+  
+  input
+  {
+    left: -15px;
+    position: relative;
+    top: 22px;
+    display: block;
+  }
+  
+  label span
+  {
+    position: relative;
+    top: -10px;
+    padding: 10px;  
+  }
+  
  </style>
 </head>
 <body>
@@ -124,7 +160,7 @@
  </p>
  <p>
   Nightly patches are automatically generated development builds baked by a helpful bot, which you can use to stay on the bleeding edge.<br/><br/>
-  They come with the latest changes, enhancements and bug fixes, we are using a rolling release model so you can stay on the loop.
+  They come with the latest changes, enhancements and bug fixes, we are using a rolling release model so that you can stay on the loop.
  </p>
  <p>
   <h3>Included languages:</h3>
@@ -143,8 +179,8 @@
 
 <h1>INSTRUCTIONS</h1>
 
-<label><input type=checkbox checked/> Mount&amp;Blade 1.011 </label>
-<label><input type=checkbox checked/> Mount&amp;Blade Warband </label>
+<label id=mab1011><input name=dummy type=radio checked /> <span>Mount&amp;Blade 1.011</span> </label>
+<label id=warband><input name=dummy type=radio         /> <span>Mount&amp;Blade Warband</span> </label>
 
 
 <table>
