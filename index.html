@@ -214,15 +214,12 @@
     </if_wb>
 
     <li>
-      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <em>2014/10/03</em>)
+      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <em id=nightly_date>2014/10/03</em>)
       <span>
         Download from
-        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2014.10.03-14.27_r2034.7z>Bitbucket</a> 
-        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/><em>(see more)</em></a>.
-
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link>Bitbucket</a> 
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
       </span>
-
-      
     </li>
   </ol>
 </div>
@@ -230,17 +227,17 @@
  </body>
  <script>
  
- window.onchange=function(e)
- {
+  window.onchange=function(e)
+  {
     localStorage["selected_instruction"] = e.srcElement.id;
     
     document.documentElement.classList.add(e.srcElement.id=="wb" ? "if_wb" : "if_mb");
     document.documentElement.classList.remove(e.srcElement.id=="wb" ? "if_mb": "if_wb");
- }
- 
- document.getElementById(localStorage["selected_instruction"] || "mb").click();
- 
- 
+  }
+
+  document.getElementById(localStorage["selected_instruction"] || "mb").click();
+
+
   if(!!navigator.userAgent.match(/Windows/))
     document.documentElement.classList.add("win");
 
