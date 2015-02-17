@@ -309,29 +309,67 @@
   
   shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json)
   {
+    console.log("Starting to scrape the TLD downloads page & table!\n");
+    
     window.bb_downloads = (new DOMParser).parseFromString(json.contents, "text/html");
     window.bb_uploads_table = bb_downloads.getElementById("uploaded-files");
     
-    //return;
-    
     /* grab the array of elements in the table */
     window.bb_uploads_table = bb_uploads_table.children[1].children;
+    
+    /* default paleolithic date to compare against */
+    window.mb_date = new Date("1992-01-01");
+    window.wb_date = new Date("1992-01-01");
 
     for(child in bb_uploads_table)
     {
-    
-      //console.log(typeof bb_uploads_table[child]);
-      
+
       if(typeof bb_uploads_table[child] === 'object')
       {
-        console.log(bb_uploads_table[child]);
+        //console.log(bb_uploads_table[child]);
         
-        console.log(new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].textContent));
-        console.log(bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].textContent);
+        var cur_date = new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].textContent);
+        var cur_href = bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].textContent;
         
-        //.getElementsByName("time")
+        if (cur_date && cur_href)
+        {
+          /* mab1011 link? */
+          if(cur_href.indexOf("TLD_3.3_nightly_patch_") != -1)
+          {
+            console.log("This is a mab1011 link!");
+            
+            console.log((+cur_date) +" "+ (+mb_date));
+
+            if(+cur_date > +mb_date)
+            {
+              console.log("mb newest to date!");
+              
+              window.mb_date = cur_date;
+              window.mb_href = cur_href;
+            }
+          
+          }
+          /* warband link? */
+          else if(cur_href.indexOf("TLD_3.3_wbcompat_nightly_patch_") != -1)
+          {
+            console.log("This is a warband link!");
+            if(+cur_date > +wb_date)
+            {
+              console.log("wb newest to date!");
+              
+              window.wb_date = cur_date;
+              window.wb_href = cur_href;
+            }
+          }
+        }
+
       }
     }
+    
+    console.log("Finished!\n--");
+    
+    console.log("Latest Warband nightly URL: "+ wb_href +" from "+ wb_date);
+    console.log("Latest MB 1011 nightly URL: "+ mb_href +" from "+ wb_date);
 
   });
   
