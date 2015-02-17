@@ -369,18 +369,28 @@
     
     console.log("Finished!\n--");
     
-    console.log("Latest Warband nightly URL: "+ wb_href +" from "+ wb_date);
-    console.log("Latest MB 1011 nightly URL: "+ mb_href +" from "+ mb_date);
-    
-    document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear() + "/" +
-                                                                  ("0" + (1 + mb_date.getMonth())).substr(-2) + "/" +
-                                                                  ("0" +      mb_date.getDate()).substr(-2);
-    document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear() + "/" +
-                                                                  ("0" + (1 + wb_date.getMonth())).substr(-2) + "/" +
-                                                                  ("0" +      wb_date.getDate()).substr(-2);
+    if(wb_href && mb_href)
+    {
+      console.log("Latest Warband nightly URL: "+ wb_href +" from "+ wb_date);
+      console.log("Latest MB 1011 nightly URL: "+ mb_href +" from "+ mb_date);
+      
+      /* probably a fine example of why js sucks */
+      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear() + "/" +
+                                                                    ("0" + (1 + mb_date.getMonth())).substr(-2) + "/" +
+                                                                    ("0" +      mb_date.getDate()).substr(-2);
+      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear() + "/" +
+                                                                    ("0" + (1 + wb_date.getMonth())).substr(-2) + "/" +
+                                                                    ("0" +      wb_date.getDate()).substr(-2);
 
-    document.getElementById("nightly_link_mab1011").href = mb_href + "LOL";
-    document.getElementById("nightly_link_warband").href = wb_href + "LOL";
+      /* replace the static links with the latest scrapped ones */
+      document.getElementById("nightly_link_mab1011").href = "https://bitbucket.org" + mb_href;
+      document.getElementById("nightly_link_warband").href = "https://bitbucket.org" + wb_href;
+    }
+    
+    else
+    {
+      console.error("the bb downloads page couldn't be scrapped! :(");
+    }
 
   });
   
