@@ -293,10 +293,11 @@
         throw "you suck! a callback function soup is needed to run this!";
       }
       
+      /* remove the temp script thingie */
       document.head.removeChild(jsonp);
-      delete callee;
       
-      console.log(this);
+      /* remove itself */
+      delete window[random_id];
     };
   
     jsonp=document.createElement("script");
@@ -306,10 +307,33 @@
   }
   
   
-  /*shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json){
-    bb_downloads = (new DOMParser).parseFromString(json.content, "text/html");
-    bb_downloads.getElementFromId("bb-uploads");
-  }); */
+  shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json)
+  {
+    window.bb_downloads = (new DOMParser).parseFromString(json.contents, "text/html");
+    window.bb_uploads_table = bb_downloads.getElementById("uploaded-files");
+    
+    //return;
+    
+    /* grab the array of elements in the table */
+    window.bb_uploads_table = bb_uploads_table.children[1].children;
+
+    for(child in bb_uploads_table)
+    {
+    
+      //console.log(typeof bb_uploads_table[child]);
+      
+      if(typeof bb_uploads_table[child] === 'object')
+      {
+        console.log(bb_uploads_table[child]);
+        
+        console.log(new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].textContent));
+        console.log(bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].textContent);
+        
+        //.getElementsByName("time")
+      }
+    }
+
+  });
   
 /*
  * DOMParser HTML extension
