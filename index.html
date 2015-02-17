@@ -218,8 +218,8 @@
     </if_wb>
 
     <li>
-      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>__2014/10/03</em></if_wb><!--
-                                                                                     --><if_mb><em id=nightly_date_mab1011>--2014/10/03</em></if_mb>)
+      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>2014/10/03 *checking*</em></if_wb><!--
+                                                                                     --><if_mb><em id=nightly_date_mab1011>2014/10/03 *checking*</em></if_mb>)
       <span>
         Download from
         <if_wb>
@@ -254,6 +254,8 @@
  </body>
  <script>
  
+  /* set either the `.if_wb` or the `.if_mb` class to the root element,
+     so that the css picks it up and conditionally hides whatever it needs to */
   window.onchange=function(e)
   {
     localStorage["selected_instruction"] = e.srcElement.id;
@@ -262,6 +264,7 @@
     document.documentElement.classList.remove(e.srcElement.id=="wb" ? "if_mb": "if_wb");
   }
 
+  
   document.getElementById(localStorage["selected_instruction"] || "mb").click();
   
   /* swyter-- tiny custom made json callback */
@@ -324,13 +327,12 @@
           /* mab1011 link? */
           if(cur_href.indexOf("TLD_3.3_nightly_patch_") != -1)
           {
-            console.log("This is a mab1011 link!");
-            
-            console.log((+cur_date) +" "+ (+mb_date));
+            //console.log("This is a mab1011 link!");
+            //console.log((+cur_date) +" "+ (+mb_date));
 
             if(+cur_date > +mb_date)
             {
-              console.log("mb newest to date!");
+              //console.log("mb newest to date!");
               
               window.mb_date = cur_date;
               window.mb_href = cur_href;
@@ -340,10 +342,11 @@
           /* warband link? */
           else if(cur_href.indexOf("TLD_3.3_wbcompat_nightly_patch_") != -1)
           {
-            console.log("This is a warband link!");
+            //console.log("This is a warband link!");
+            
             if(+cur_date > +wb_date)
             {
-              console.log("wb newest to date!");
+              //console.log("wb newest to date!");
               
               window.wb_date = cur_date;
               window.wb_href = cur_href;
@@ -358,16 +361,19 @@
     
     if(wb_href && mb_href)
     {
-      console.log("Latest Warband nightly URL: "+ wb_href +" from "+ wb_date);
-      console.log("Latest MB 1011 nightly URL: "+ mb_href +" from "+ mb_date);
+      console.log("latest Warband nightly URL: "+ wb_href +", uploaded on "+ wb_date);
+      console.log("latest MB 1011 nightly URL: "+ mb_href +", uploaded on "+ mb_date);
       
-      /* probably a fine example of why js sucks */
-      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear() + "/" +
-                                                                    ("0" + (1 + mb_date.getMonth())).substr(-2) + "/" +
-                                                                    ("0" +      mb_date.getDate()).substr(-2);
-      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear() + "/" +
-                                                                    ("0" + (1 + wb_date.getMonth())).substr(-2) + "/" +
-                                                                    ("0" +      wb_date.getDate()).substr(-2);
+      /* probably a fine example of why js sucks,
+         try to format dates in a compact way w/o ending churning out spaguetti code */
+         
+      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + "/" +
+                                                                   ( "0" + (1 + mb_date.getMonth()) ).substr(-2) + "/" +
+                                                                   ( "0" +      mb_date.getDate()   ).substr(-2);
+                                                                   
+      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + "/" +
+                                                                   ( "0" + (1 + wb_date.getMonth()) ).substr(-2) + "/" +
+                                                                   ( "0" +      wb_date.getDate()   ).substr(-2);
 
       /* replace the static links with the latest scrapped ones */
       document.getElementById("nightly_link_mab1011").href = "https://bitbucket.org" + mb_href;
