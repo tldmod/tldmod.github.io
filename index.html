@@ -221,7 +221,8 @@
     </if_wb>
 
     <li>
-      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <em id=nightly_date>2014/10/03</em>)
+      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>__2014/10/03</em></if_wb>
+                                                                                        <if_mb><em id=nightly_date_mab1011>--2014/10/03</em></if_mb>)
       <span>
         Download from
         <if_wb>
@@ -369,7 +370,17 @@
     console.log("Finished!\n--");
     
     console.log("Latest Warband nightly URL: "+ wb_href +" from "+ wb_date);
-    console.log("Latest MB 1011 nightly URL: "+ mb_href +" from "+ wb_date);
+    console.log("Latest MB 1011 nightly URL: "+ mb_href +" from "+ mb_date);
+    
+    document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear() + "/" +
+                                                                  ("0" + (1 + mb_date.getMonth())).substr(-2) + "/" +
+                                                                  ("0" +      mb_date.getDate()).substr(-2);
+    document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear() + "/" +
+                                                                  ("0" + (1 + wb_date.getMonth())).substr(-2) + "/" +
+                                                                  ("0" +      wb_date.getDate()).substr(-2);
+
+    document.getElementById("nightly_link_mab1011").href = mb_href + "LOL";
+    document.getElementById("nightly_link_warband").href = wb_href + "LOL";
 
   });
   
