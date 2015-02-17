@@ -102,9 +102,6 @@
     margin: 0;
   }
   
-  
-  
-  
   #mab1011, #warband
   {
     display: inline-block;
@@ -221,8 +218,8 @@
     </if_wb>
 
     <li>
-      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>__2014/10/03</em></if_wb>
-                                                                                        <if_mb><em id=nightly_date_mab1011>--2014/10/03</em></if_mb>)
+      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>__2014/10/03</em></if_wb><!--
+                                                                                     --><if_mb><em id=nightly_date_mab1011>--2014/10/03</em></if_mb>)
       <span>
         Download from
         <if_wb>
@@ -266,16 +263,6 @@
   }
 
   document.getElementById(localStorage["selected_instruction"] || "mb").click();
-
-
-  if(!!navigator.userAgent.match(/Windows/))
-    document.documentElement.classList.add("win");
-
-  if(!!navigator.userAgent.match(/Linux|BSD/))
-    document.documentElement.classList.add("nix");
-
-  if(!!navigator.userAgent.match(/Mac/))
-    document.documentElement.classList.add("mac");
   
   /* swyter-- tiny custom made json callback */
   function shitty_jsonp(url, callback)
