@@ -304,8 +304,8 @@
     document.documentElement.classList.remove(e.target.id=="wb" ? "if_mb": "if_wb");
   }
 
-
   document.getElementById(localStorage["selected_instruction"] || "mb").click();
+  window.onchange({target: {id: localStorage["selected_instruction"] || "mb" }}); /* meh */
 
   /* swyter-- tiny custom made json callback, don't judge me :) */
   function shitty_jsonp(url, callback)
