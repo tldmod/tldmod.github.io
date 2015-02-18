@@ -16,7 +16,7 @@
  <meta name=author content=swyter />
  <title>The Last Days · Nightly patches</title>
  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
- <link href='fnt/merryweather;400italic,400.css' rel='stylesheet' type='text/css' />
+ <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic' rel='stylesheet' type='text/css' />
  <style>
   html
   {
@@ -284,10 +284,10 @@
      so that the css picks it up and conditionally hides whatever it needs to */
   window.onchange=function(e)
   {
-    localStorage["selected_instruction"] = e.srcElement.id;
+    localStorage["selected_instruction"] = e.target.id;
 
-    document.documentElement.classList.add(e.srcElement.id=="wb" ? "if_wb" : "if_mb");
-    document.documentElement.classList.remove(e.srcElement.id=="wb" ? "if_mb": "if_wb");
+    document.documentElement.classList.add(e.target.id=="wb" ? "if_wb" : "if_mb");
+    document.documentElement.classList.remove(e.target.id=="wb" ? "if_mb": "if_wb");
   }
 
 
