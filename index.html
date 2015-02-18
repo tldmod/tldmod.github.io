@@ -3,14 +3,17 @@
 <html>
 <script>
   /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
-  for(elem in script=document.getElementsByTagName("script"))
+  try
   {
-    if(typeof script[elem]==="object" && script[elem].innerText.match(/NR/))
+    for(elem in script=document.getElementsByTagName("script"))
     {
-      console.log(script[elem].innerText.match(/NR/),typeof script[elem]);
-      script[elem].parentElement.removeChild(script[elem]);
+      if(typeof script[elem]==="object" && script[elem].innerHTML.match(/NR/))
+      {
+        console.log(script[elem].innerText.match(/NR/),typeof script[elem]);
+        script[elem].parentElement.removeChild(script[elem]);
+      }
     }
-  }
+  } catch(e) {};
 </script>
 <head>
  <meta name=author content=swyter />
