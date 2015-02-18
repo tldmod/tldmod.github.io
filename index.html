@@ -348,8 +348,8 @@
       {
         //console.log(bb_uploads_table[child]);
 
-        var cur_date = new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].textContent);
-        var cur_href = bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].textContent;
+        var cur_date = new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].value);
+        var cur_href = bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].value;
 
         if (cur_date && cur_href)
         {
@@ -396,13 +396,13 @@
       /* probably a fine example of why js sucks,
          try to format dates in a compact way w/o ending churning out spaguetti code */
 
-      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + "/" +
-                                                                   ( "0" + (1 + mb_date.getMonth()) ).substr(-2) + "/" +
-                                                                   ( "0" +      mb_date.getDate()   ).substr(-2);
+      document.getElementById("nightly_date_mab1011").value =             mb_date.getFullYear()            + "/" +
+                                                             ( "0" + (1 + mb_date.getMonth()) ).substr(-2) + "/" +
+                                                             ( "0" +      mb_date.getDate()   ).substr(-2);
 
-      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + "/" +
-                                                                   ( "0" + (1 + wb_date.getMonth()) ).substr(-2) + "/" +
-                                                                   ( "0" +      wb_date.getDate()   ).substr(-2);
+      document.getElementById("nightly_date_warband").value =             wb_date.getFullYear()            + "/" +
+                                                             ( "0" + (1 + wb_date.getMonth()) ).substr(-2) + "/" +
+                                                             ( "0" +      wb_date.getDate()   ).substr(-2);
 
       /* replace the static links with the latest scrapped ones */
       document.getElementById("nightly_link_mab1011").href = "https://bitbucket.org" + mb_href;
