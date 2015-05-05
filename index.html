@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<!-- hi there, have a good read! -->
+<html>
+<head>
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ <meta name=viewport content="width=device-width, initial-scale=1" />
+
+ <meta name=author content=swyter />
+ <title>The Last Days · Nightly patches</title>
+
+ <link href='fnt/merryweather;400italic,400.css' rel='stylesheet' type='text/css' />
+ <style>
+  html
+  {
+    background:#221A18;
+    color:#985;
+    text-shadow:2px 1px black;
+    font-family:cursive;
+
+            user-select:none;
+    -webkit-user-select:none;
+       -moz-user-select:none;
+         -o-user-select:none;
+
+    cursor:default !important;
+    font-family: 'Merriweather';
+
+    background-image: url(img/swyTLDprofile.bg.jpg);
+    background-position:0 -600px;
+    height:100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat:no-repeat;
+  }
+
+  a[href]
+  {
+    color:inherit;
+  }
+
+  body
+  {
+    max-width:620px;
+    margin:0 auto;
+    padding:25px;
+  }
+
+  ul li
+  {
+    list-style-type: circle;
+  }
+
+  #lang li[lang]:before
+  {
+    content: "";
+    display: inline-block;
+    /* background-image: url(img/attr(lang).png); */
+    width: 16px;
+    height: 11px;
+    margin-right: 5px;
+  }
+
+  /* shitty CSS3 implementations ftw! */
+
+  #lang li[lang=en]:before
+  {
+    background-image: url(img/en.png);
+  }
+  #lang li[lang=es]:before
+  {
+    background-image: url(img/es.png);
+  }
+  #lang li[lang=fr]:before
+  {
+    background-image: url(img/fr.png);
+  }
+  #lang li[lang=de]:before
+  {
+    background-image: url(img/de.png);
+  }
+  #lang li[lang=pl]:before
+  {
+    background-image: url(img/pl.png);
+  }
+  #lang li[lang=it]:before
+  {
+    background-image: url(img/it.png);
+  }
+
+  #ul
+  {
+    list-style: none;
+    margin: 0;
+  }
+
+  #mab1011, #warband
+  {
+    display: inline-block;
+    background-repeat: no-repeat;
+    padding-left: 36px;
+    height: 32px;
+  }
+
+  #mab1011
+  {
+    background-image: url(img/icon-mab1011.png);
+  }
+
+  #warband
+  {
+    background-image: url(img/icon-warband.png);
+  }
+
+  input
+  {
+    left: -15px;
+    position: relative;
+    top: 22px;
+    display: block;
+  }
+
+  label span
+  {
+    position: relative;
+    top: -10px;
+    padding: 10px;
+  }
+
+  ol span, .download
+  {
+    display: block;
+    padding-left: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    background-image: url(img/download.gif);
+    background-repeat: no-repeat;
+  }
+
+  .if_wb if_mb
+  {
+    display: none;
+  }
+  .if_mb if_wb
+  {
+    display: none;
+  }
+
+  #links
+  {
+    text-align:center;
+  }
+  
+  noscript
+  {
+    position: fixed;
+    display: block;
+    bottom: 20px;
+    margin-left: 20px;
+    left: 0;
+    width: 80%;
+    background: rgba(0,0,0,.9);
+    padding: 14px;
+    border: 2px solid;
+    border-radius: 5px;
+    box-shadow: 2px 2px;
+  }
+ </style>
+</head>
+<body>
+ <h1><em>The Last Days</em> nightly patches!</h1>
+ <p>
+  <em>The Last Days of the Third Age</em> is a long-standing, community-developed Tolkien-based mod for <em>Mount&amp;Blade</em> and <em>Mount&Blade Warband</em>.
+ </p>
+ <p>
+  Nightly patches are automatically generated development builds baked by a helpful bot, which you can use to stay on the bleeding edge.<br/><br/>
+  They come with the latest changes, enhancements and bug fixes, we are using a <em>rolling release</em> model so that you can stay on the loop.
+ </p>
+ <p>
+  <h3>Included languages:</h3>
+  <ul id=lang>
+     <li lang=en>English</li>
+     <li lang=es>Castellano</li>
+     <li lang=fr>Français</li>
+     <li lang=de>Deutsch</li>
+     <li lang=pl>Polski (60%)</li>
+     <li lang=it>Italiano (24%)</li>
+     <li>
+      <a href=https://transifex.com/projects/p/tld/ target=tab>Want to contribute?</a>
+     </li>
+  </ul>
+ </p>
+
+<h1>INSTRUCTIONS</h1>
+
+<label id=mab1011>
+  <input id=mb name=dummy type=radio />
+  <span>Mount&amp;Blade 1.011</span>
+</label>
+<label id=warband>
+  <input id=wb name=dummy type=radio />
+  <span>Mount&amp;Blade Warband</span>
+</label>
+
+<div id=instructions>
+  <ol>
+    <li>Latest standalone version of the mod — <em>TLD_3.3.7z</em>
+      <span>
+        Download from
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3.7z>Bitbucket</a> or
+        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33#subheader>ModDB</a>.
+      </span>
+    </li>
+
+    <if_wb>
+    <li>
+     Warband compatibility patch. — <em>TLD_3.3_wbcompat.7z</em>
+      <span>
+        Download from
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat.7z>Bitbucket</a> or
+        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33-warband-patch#subheader>ModDB</a>.
+      </span>
+    </li>
+    </if_wb>
+
+    <li>
+      Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>2014/10/03 *checking*</em></if_wb><!--
+                                                                                     --><if_mb><em id=nightly_date_mab1011>2014/10/03 *checking*</em></if_mb>)
+      <span>
+        Download from
+        <if_wb>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link_warband>Bitbucket</a>
+        </if_wb>
+        <if_mb>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link_mab1011>Bitbucket</a>
+        </if_mb>
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
+      </span>
+    </li>
+  </ol>
+
+  <p>
+    <b><em>To install:</em></b>
+
+    Extract them sequentially, dragging and dropping a <em>TLD</em> directory inside of the <em>Modules</em> folder of the game, overwriting time after time.
+
+    <if_mb>Once you are done, navigate into the <em>TLD</em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if_mb>
+
+    Then just select the mod from the launcher's drop-down list and play.
+  </p>
+
+  <p id=links>
+    <a href=https://trello.com/b/ntzYNdEA/ target=tab>To-do list</a> |
+    <a href=http://synnaskole.sweb.cz/TLDManual3.3.pdf target=tab>Manual</a> |
+    <a href=http://moddb.com/mods/the-last-days/ target=tab>ModDB profile</a> |
+    <a href=https://twitter.com/tldmod target=tab>Twitter</a>
+  </p>
+</div>
+
+<noscript>
+  Hi. This page kind of uses JavaScript to grab the list of downloads and find the latest one.<br/>
+  <br/>
+  You don't seem to have it (enabled), so the download links that you'll obtain are from 2014/10/03,
+  which were the most current ones at the time of me typing this,
+  and may or may not be updated at yours, person of the future! :)<br/>
+  <br/>
+  Respectful about your browsing preferences and... well... umm... elegantly yours.<br/>
+  --swyter *bows*
+</noscript>
+
+ </body>
+ <script>
+
+  /* set either the `.if_wb` or the `.if_mb` class to the root element,
+     so that the css picks it up and conditionally hides whatever it needs to */
+  window.onchange=function(e)
+  {
+    localStorage["selected_instruction"] = e.srcElement.id;
+
+    document.documentElement.classList.add(e.srcElement.id=="wb" ? "if_wb" : "if_mb");
+    document.documentElement.classList.remove(e.srcElement.id=="wb" ? "if_mb": "if_wb");
+  }
+
+
+  document.getElementById(localStorage["selected_instruction"] || "mb").click();
+
+  /* swyter-- tiny custom made json callback, don't judge me :) */
+  function shitty_jsonp(url, callback)
+  {
+    random_id = "CB" + (+new Date());
+
+    this.window[random_id] = function(json)
+    {
+      if(typeof callback === "function")
+      {
+        callback.apply(this, arguments);
+      }
+
+      else
+      {
+        throw "you suck! a callback function soup is needed to run this!";
+      }
+
+      /* remove the temp script thingie */
+      document.head.removeChild(jsonp);
+
+      /* remove itself */
+      delete window[random_id];
+    };
+
+    jsonp=document.createElement("script");
+    jsonp.setAttribute("src","http://www.whateverorigin.org/get?url="+url+"&callback="+random_id);
+
+    document.head.appendChild(jsonp);
+  }
+
+  /* here's the real meal V */
+  shitty_jsonp("http://bitbucket.org/Swyter/tld-downloads/downloads", function(json)
+  {
+    console.log("Starting to scrape the TLD downloads page & table!\n");
+
+    window.bb_downloads = (new DOMParser).parseFromString(json.contents, "text/html");
+    window.bb_uploads_table = bb_downloads.getElementById("uploaded-files");
+
+    /* grab the array of elements in the table */
+    window.bb_uploads_table = bb_uploads_table.children[1].children;
+
+    /* default paleolithic date to compare against */
+    window.mb_date = new Date("1992-01-01");
+    window.wb_date = new Date("1992-01-01");
+
+    for(child in bb_uploads_table)
+    {
+
+      if(typeof bb_uploads_table[child] === 'object')
+      {
+        //console.log(bb_uploads_table[child]);
+
+        var cur_date = new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].textContent);
+        var cur_href = bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].textContent;
+
+        if (cur_date && cur_href)
+        {
+          /* mab1011 link? */
+          if(cur_href.indexOf("TLD_3.3_nightly_patch_") != -1)
+          {
+            //console.log("This is a mab1011 link!");
+            //console.log((+cur_date) +" "+ (+mb_date));
+
+            if(+cur_date > +mb_date)
+            {
+              //console.log("mb newest to date!");
+
+              window.mb_date = cur_date;
+              window.mb_href = cur_href;
+            }
+
+          }
+          /* warband link? */
+          else if(cur_href.indexOf("TLD_3.3_wbcompat_nightly_patch_") != -1)
+          {
+            //console.log("This is a warband link!");
+
+            if(+cur_date > +wb_date)
+            {
+              //console.log("wb newest to date!");
+
+              window.wb_date = cur_date;
+              window.wb_href = cur_href;
+            }
+          }
+        }
+
+      }
+    }
+
+    console.log("Finished!\n--");
+
+    if(wb_href && mb_href)
+    {
+      console.log("latest Warband nightly URL: "+ wb_href +", uploaded on "+ wb_date);
+      console.log("latest MB 1011 nightly URL: "+ mb_href +", uploaded on "+ mb_date);
+
+      /* probably a fine example of why js sucks,
+         try to format dates in a compact way w/o ending churning out spaguetti code */
+
+      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + "/" +
+                                                                   ( "0" + (1 + mb_date.getMonth()) ).substr(-2) + "/" +
+                                                                   ( "0" +      mb_date.getDate()   ).substr(-2);
+
+      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + "/" +
+                                                                   ( "0" + (1 + wb_date.getMonth()) ).substr(-2) + "/" +
+                                                                   ( "0" +      wb_date.getDate()   ).substr(-2);
+
+      /* replace the static links with the latest scrapped ones */
+      document.getElementById("nightly_link_mab1011").href = "https://bitbucket.org" + mb_href;
+      document.getElementById("nightly_link_warband").href = "https://bitbucket.org" + wb_href;
+    }
+
+    else
+    {
+      console.error("the bb downloads page couldn't be scrapped! :(");
+    }
+
+  });
+
+  /*
+   * DOMParser HTML extension
+   * 2012-09-04
+   *
+   * By Eli Grey, http://eligrey.com
+   * Public domain.
+   * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+   */
+
+  /*! @source https://gist.github.com/1129031 */
+  /*global document, DOMParser*/
+
+  (function(DOMParser) {
+    "use strict";
+
+    var DOMParser_proto = DOMParser.prototype;
+    var real_parseFromString = DOMParser_proto.parseFromString;
+
+    // Firefox/Opera/IE throw errors on unsupported types
+    try
+    {
+      // WebKit returns null on unsupported types
+      if ((new DOMParser).parseFromString("", "text/html"))
+      {
+        // text/html parsing is natively supported
+        return;
+      }
+    } catch (ex) {}
+
+    DOMParser_proto.parseFromString = function(markup, type) {
+      if (/^\s*text\/html\s*(?:;|$)/i.test(type))
+      {
+        var doc = document.implementation.createHTMLDocument("");
+
+        if (markup.toLowerCase().indexOf('<!doctype') > -1)
+        {
+          doc.documentElement.innerHTML = markup;
+        }
+        else
+        {
+          doc.body.innerHTML = markup;
+        }
+        return doc;
+      }
+      else
+      {
+        return real_parseFromString.apply(this, arguments);
+      }
+
+    };
+  }(DOMParser));
+
+ </script>
+ <script>
+  /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
+  for(elem in script=document.getElementsByTagName("script"))
+  {
+    if(typeof script[elem]==="object" && script[elem].innerText.match(/NR/))
+    {
+      console.log(script[elem].innerText.match(/NR/),typeof script[elem]);
+      script[elem].parentElement.removeChild(script[elem]);
+    }
+  }
+</script>
+</html>
