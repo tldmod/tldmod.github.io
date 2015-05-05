@@ -23,13 +23,12 @@
  <link rel=apple-touch-icon sizes='60x60'   href='/ico/apple-touch-icon-60x60.png'>
  <link rel=apple-touch-icon sizes='72x72'   href='/ico/apple-touch-icon-72x72.png'>
  <link rel=apple-touch-icon sizes='76x76'   href='/ico/apple-touch-icon-76x76.png'>
- 
+
  <link rel=apple-touch-icon sizes='114x114' href='/ico/apple-touch-icon-114x114.png'>
  <link rel=apple-touch-icon sizes='120x120' href='/ico/apple-touch-icon-120x120.png'>
 
- <link rel=icon type='image/png' href='/ico/favicon-32x32.png' sizes='32x32'>
- <link rel=icon type='image/png' href='/ico/favicon-96x96.png' sizes='96x96'>
- <link rel=icon type='image/png' href='/ico/favicon-16x16.png' sizes='16x16'>
+ <link rel=icon href='/ico/favicon.ico'       sizes='16x16 32x32 48x48'>
+ <link rel=icon href='/ico/favicon-96x96.png' sizes='96x96'>
 
  <link rel=manifest href='/ico/manifest.json'>
 
@@ -38,7 +37,7 @@
 
  <meta name=google-site-verification content='z8OFLNdGvqrfOABfPEYEipzZbVLmRPQBz6ryF7AZX-M'>
 
- <link rel=stylesheet href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic' type='text/css'>
+ <link rel=stylesheet href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic' type='text/css' lazyload>
  <style>
   html
   {
@@ -181,7 +180,7 @@
   {
     text-align:center;
   }
-  
+
   noscript
   {
     position: fixed;
@@ -196,11 +195,23 @@
     border-radius: 5px;
     box-shadow: 2px 2px;
   }
-  
+
   /* html5 tags compatibility for older browsers */
   section, article, aside, footer, header, nav, hgroup
   {
     display:block;
+  }
+
+  abbr
+  {
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+    display: inline-block;
+    line-height: 15px;
+  }
+
+  p
+  {
+    line-height: 1.5em;
   }
  </style>
 </head>
@@ -230,74 +241,88 @@
   </ul>
  </section>
 
- <h1>INSTRUCTIONS</h1>
- 
- <label id=mab1011>
-   <input id=mb name=dummy type=radio title='Select this to switch to the original game instructions.'>
-   <span>Mount&amp;Blade 1.011</span>
- </label>
- <label id=warband>
-   <input id=wb name=dummy type=radio title='Select this to switch to the Warband-related instructions.'>
-   <span>Mount&amp;Blade Warband</span>
- </label>
- 
  <section id=instructions>
-   <ol>
-     <li>Latest standalone version of the mod — <em>TLD_3.3.7z</em>
-       <span>
-         Download from
-         <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3.7z>Bitbucket</a> or
-         <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33#subheader>ModDB</a>.
-       </span>
-     </li>
- 
-     <if-wb>
-     <li>
-      Warband compatibility patch. — <em>TLD_3.3_wbcompat.7z</em>
-       <span>
-         Download from
-         <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat.7z>Bitbucket</a> or
-         <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33-warband-patch#subheader>ModDB</a>.
-       </span>
-     </li>
-     </if-wb>
- 
-     <li>
-       Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2014/10/03 *checking*</em></if-wb><!--
-                                                                                      --><if-mb><em id=nightly_date_mab1011>2014/10/03 *checking*</em></if-mb>)
-       <span>
-         Download from
-         <if-wb>
-           <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link_warband>Bitbucket</a>
-         </if-wb>
-         <if-mb>
-           <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link_mab1011>Bitbucket</a>
-         </if-mb>
-         <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
-       </span>
-     </li>
-   </ol>
- 
-   <p>
-     <b><em>To install:</em></b>
- 
-     Extract them sequentially, dragging and dropping a <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> directory inside of the <em>Modules</em> folder of the game, overwriting time after time.
- 
-     <if-mb>Once you are done, navigate into the <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if-mb>
- 
-     Then just select the mod from the launcher's drop-down list and play.
-   </p>
- 
-   <nav>
-     <p id=links>
-       <a href=https://trello.com/b/ntzYNdEA/             title='Visit the place where we organize ourselves.'        target=tab>To-do list</a> |
-       <a href=http://synnaskole.sweb.cz/TLDManual3.3.pdf title='Visit the comprehensive PDF help file.'              target=tab>Manual</a> |
-       <a href=http://moddb.com/mods/the-last-days/       title='Visit the place where our players rate and comment.' target=tab>ModDB profile</a> |
-       <a href=https://twitter.com/tldmod                 title='Visit the place where we keep you updated.'          target=tab>Twitter</a>
-     </p>
-   </nav>
+  <h1>INSTRUCTIONS</h1>
+
+  <label id=mab1011>
+    <input id=mb name=dummy type=radio title='Select this to switch to the original game instructions.'>
+    <span>Mount&amp;Blade 1.011</span>
+  </label>
+  <label id=warband>
+    <input id=wb name=dummy type=radio title='Select this to switch to the Warband-related instructions.'>
+    <span>Mount&amp;Blade Warband</span>
+  </label>
+
+  <ol>
+    <li>Latest standalone version of the mod — <em>TLD_3.3.7z</em>
+      <span>
+        Download from
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3.7z>Bitbucket</a> or
+        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33#subheader>ModDB</a>.
+      </span>
+    </li>
+
+    <if-wb>
+    <li>
+     Warband compatibility patch. — <em>TLD_3.3_wbcompat.7z</em>
+      <span>
+        Download from
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat.7z>Bitbucket</a> or
+        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33-warband-patch#subheader>ModDB</a>.
+      </span>
+    </li>
+    </if-wb>
+
+    <li>
+      Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2015/04/23 *checking*</em></if-wb><!--
+                                                                                     --><if-mb><em id=nightly_date_mab1011>2015/04/23 *checking*</em></if-mb>)
+      <span>
+        Download from
+        <if-wb>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2015.04.23-14.13_r2043.7z id=nightly_link_warband>Bitbucket</a>
+        </if-wb>
+        <if-mb>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_nightly_patch_2015.04.23-14.13_r2043.7z id=nightly_link_mab1011>Bitbucket</a>
+        </if-mb>
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
+      </span>
+    </li>
+  </ol>
+
+  <p>
+    <b><em>To install:</em></b>
+
+    Extract them sequentially, dragging and dropping a <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> directory inside of the
+
+    <!-- if you think that those *blank comments* are a bit fishy and unsightly, welcome to utopia land!
+         they are there to hide carriage returns to the markup parser, otherwise adds extra spaces between words -->
+    <if-mb>
+      <abbr title='By default the game is installed either in &#10;  «C:\Program Files\Steam\SteamApps\common\mount and blade\modules\»&#10; for the Steam version or &#10;  «C:\Program Files (x86)\Mount&amp;Blade\modules\»&#10; for the standalone version.'>
+       <em>Modules</em> folder of the game<!--
+   --></abbr><!--
+  --></if-mb><!--
+
+  --><if-wb>
+      <abbr title='By default the game is installed either in &#10;  «C:\Program Files (x86)\Steam\SteamApps\common\mountblade warband\modules\»&#10; for the Steam version or &#10;  «C:\Program Files (x86)\Mount&amp;Blade Warband\modules\»&#10; for the standalone version.'>
+       <em>Modules</em> folder of the game<!--
+    --></abbr><!--
+  --></if-wb>, overwriting time after time.
+
+    <if-mb>Once you are done, navigate into the <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if-mb>
+
+    Then just select the mod from the launcher's drop-down list and play.
+  </p>
+
+  <nav>
+    <p id=links>
+      <a href=https://trello.com/b/ntzYNdEA/             title='Visit the place where we organize ourselves.'        target=tab>To-do list</a> |
+      <a href=http://synnaskole.sweb.cz/TLDManual3.3.pdf title='Visit the comprehensive PDF help file.'              target=tab>Manual</a> |
+      <a href=http://moddb.com/mods/the-last-days/       title='Visit the place where our players rate and comment.' target=tab>ModDB profile</a> |
+      <a href=https://twitter.com/tldmod                 title='Visit the place where we keep you updated.'          target=tab>Twitter</a>
+    </p>
+  </nav>
  </section>
- 
+
  <noscript>
    Hi. This page kind of uses JavaScript to grab the list of downloads and find the latest one.<br/>
    <br/>
@@ -319,7 +344,7 @@
     document.documentElement.classList.add(   e.target.id=="wb" ? "if-wb" : "if-mb");
     document.documentElement.classList.remove(e.target.id=="wb" ? "if-mb" : "if-wb");
   }
-  
+
   /* hacky workaround to get it working at loading time, hell yeah! */
   var cur = localStorage["selected_instruction"] || "mb";
 
