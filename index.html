@@ -168,11 +168,11 @@
     background-repeat: no-repeat;
   }
 
-  .if_wb if_mb
+  .if-wb if-mb
   {
     display: none;
   }
-  .if_mb if_wb
+  .if-mb if-wb
   {
     display: none;
   }
@@ -215,7 +215,7 @@
   Nightly patches are automatically generated development builds baked by a helpful bot, which you can use to stay on the bleeding edge.<br/><br/>
   They come with the latest changes, enhancements and bug fixes, we are using a <em>rolling release</em> model so that you can stay on the loop.
  </p>
- <p>
+ <section id=languages>
   <h3>Included languages:</h3>
   <ul id=lang>
      <li lang=en>English</li>
@@ -228,7 +228,7 @@
       <a href=https://transifex.com/projects/p/tld/ target=tab>Want to contribute?</a>
      </li>
   </ul>
- </p>
+ </section>
 
  <h1>INSTRUCTIONS</h1>
  
@@ -251,7 +251,7 @@
        </span>
      </li>
  
-     <if_wb>
+     <if-wb>
      <li>
       Warband compatibility patch. — <em>TLD_3.3_wbcompat.7z</em>
        <span>
@@ -260,19 +260,19 @@
          <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-33-warband-patch#subheader>ModDB</a>.
        </span>
      </li>
-     </if_wb>
+     </if-wb>
  
      <li>
-       Latest nightly patch for <if_wb>Warband</if_wb><if_mb>M&amp;B 1.011</if_mb> (from <if_wb><em id=nightly_date_warband>2014/10/03 *checking*</em></if_wb><!--
-                                                                                      --><if_mb><em id=nightly_date_mab1011>2014/10/03 *checking*</em></if_mb>)
+       Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2014/10/03 *checking*</em></if-wb><!--
+                                                                                      --><if-mb><em id=nightly_date_mab1011>2014/10/03 *checking*</em></if-mb>)
        <span>
          Download from
-         <if_wb>
+         <if-wb>
            <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_wbcompat_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link_warband>Bitbucket</a>
-         </if_wb>
-         <if_mb>
+         </if-wb>
+         <if-mb>
            <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.3_nightly_patch_2014.10.03-14.27_r2034.7z id=nightly_link_mab1011>Bitbucket</a>
-         </if_mb>
+         </if-mb>
          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
        </span>
      </li>
@@ -283,7 +283,7 @@
  
      Extract them sequentially, dragging and dropping a <em>TLD</em> directory inside of the <em>Modules</em> folder of the game, overwriting time after time.
  
-     <if_mb>Once you are done, navigate into the <em>TLD</em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if_mb>
+     <if-mb>Once you are done, navigate into the <em>TLD</em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if-mb>
  
      Then just select the mod from the launcher's drop-down list and play.
    </p>
@@ -308,9 +308,7 @@
    Respectful about your browsing preferences and... well... umm... elegantly yours.<br/>
    --swyter *bows*
  </noscript>
-
-</body>
-<script>
+ <script>
 
   /* set either the `.if_wb` or the `.if_mb` class to the root element,
      so that the css picks it up and conditionally hides whatever it needs to */
@@ -318,12 +316,15 @@
   {
     localStorage["selected_instruction"] = e.target.id;
 
-    document.documentElement.classList.add(   e.target.id=="wb" ? "if_wb" : "if_mb");
-    document.documentElement.classList.remove(e.target.id=="wb" ? "if_mb" : "if_wb");
+    document.documentElement.classList.add(   e.target.id=="wb" ? "if-wb" : "if-mb");
+    document.documentElement.classList.remove(e.target.id=="wb" ? "if-mb" : "if-wb");
   }
+  
+  /* hacky workaround to get it working at loading time, hell yeah! */
+  var cur = localStorage["selected_instruction"] || "mb";
 
-
-  document.getElementById(localStorage["selected_instruction"] || "mb").click();
+  document.getElementById(cur).click();
+  window.onchange({ target: {id: cur} });
 
   /* swyter-- tiny custom made json callback, don't judge me :) */
   function shitty_jsonp(url, callback)
@@ -497,8 +498,8 @@
     };
   }(DOMParser));
 
-</script>
-<script>
+ </script>
+ <script>
   /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
   for(elem in script=document.head.getElementsByTagName("script"))
   {
@@ -508,5 +509,6 @@
       script[elem].parentElement.removeChild(script[elem]);
     }
   }
-</script>
+ </script>
+</body>
 </html>
