@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <!-- hi there, have a good read! -->
 <html>
+  try
+  {
+  } catch(e) {};
 <head>
  <meta charset='utf-8'>
 
@@ -47,10 +50,21 @@
     background-image: url(img/swyTLDprofile.bg.jpg);
     background-position:0 -600px;
     height:100%;
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     height: 100%;
     background-repeat:no-repeat;
+  }
+
+  
+  /* for screens wider than the background image */
+  @media(min-width: 1349px)
+  {
+    html
+    {
+      background-position: 60% center;
+      background-size: cover;
+    }
   }
 
   a[href]
@@ -393,6 +407,8 @@
       {
         //console.log(bb_uploads_table[child]);
 
+        var cur_date = new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].value);
+        var cur_href = bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].value;
         var cur_date = new Date(bb_uploads_table[child].getElementsByTagName('time')[0].attributes["datetime"].textContent);
         var cur_href = bb_uploads_table[child].getElementsByClassName("execute")[0].attributes["href"].textContent;
 
