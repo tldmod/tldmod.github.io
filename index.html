@@ -1,21 +1,13 @@
 <!DOCTYPE HTML>
 <!-- hi there, have a good read! -->
 <html>
-<script>
-  /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
-  for(elem in script=document.getElementsByTagName("script"))
-  {
-    if(typeof script[elem]==="object" && script[elem].innerText.match(/NR/))
-    {
-      console.log(script[elem].innerText.match(/NR/),typeof script[elem]);
-      script[elem].parentElement.removeChild(script[elem]);
-    }
-  }
-</script>
 <head>
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ <meta name=viewport content="width=device-width, initial-scale=1" />
+
  <meta name=author content=swyter />
  <title>The Last Days · Nightly patches</title>
- <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
  <link href='fnt/merryweather;400italic,400.css' rel='stylesheet' type='text/css' />
  <style>
   html
@@ -466,4 +458,15 @@
   }(DOMParser));
 
  </script>
+ <script>
+  /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
+  for(elem in script=document.getElementsByTagName("script"))
+  {
+    if(typeof script[elem]==="object" && script[elem].innerText.match(/NR/))
+    {
+      console.log(script[elem].innerText.match(/NR/),typeof script[elem]);
+      script[elem].parentElement.removeChild(script[elem]);
+    }
+  }
+</script>
 </html>
