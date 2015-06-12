@@ -378,7 +378,7 @@
     };
 
     jsonp=document.createElement("script");
-    jsonp.setAttribute("src","http://www.whateverorigin.org/get?url="+url+"&callback="+random_id);
+    jsonp.setAttribute("src","https://whateverorigin.herokuapp.com/get?url="+url+"&callback="+random_id);
 
     document.head.appendChild(jsonp);
   }
