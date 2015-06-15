@@ -216,6 +216,31 @@
   {
     line-height: 1.5em;
   }
+  
+  /* make the text-ad banner thing a bit more apparent,
+     separating it from the content */
+  ins.adsbygoogle
+  {
+    border: 1px solid;
+    display: inline-block;
+  }
+  ins.adsbygoogle:after
+  {
+    display: inline-block;
+    font-size: x-small;
+    font-family: sans-serif;
+    content: 'tiny txt ad :)';
+    background: #985;
+    text-shadow: none;
+    position: absolute;
+    color: black;
+    border-radius: 0 10px 0 0;
+    transform: rotate(90deg);
+    margin-left: -22px;
+    margin-top: 22px;
+    width: 60px;
+    padding: 1px;
+  }
  </style>
 </head>
 <body>
