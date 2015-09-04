@@ -344,6 +344,7 @@
       <a href=https://trello.com/b/ntzYNdEA/             title='Visit the place where we organize ourselves.'        target=tab>To-do list</a> |
       <a href=http://synnaskole.sweb.cz/TLDManual3.3.pdf title='Visit the comprehensive PDF help file.'              target=tab>Manual</a> |
       <a href=http://moddb.com/mods/the-last-days/       title='Visit the place where our players rate and comment.' target=tab>ModDB profile</a> |
+      <a href=http://goo.gl/yIw0od                       title='Subscribe for automatic mod updates.'                target=tab>Steam Workshop</a> |
       <a href=https://twitter.com/tldmod                 title='Visit the place where we keep you updated.'          target=tab>Twitter</a>
     </p>
   </nav>
@@ -560,17 +561,6 @@
     };
   }(DOMParser));
 
- </script>
- <script>
-  /*remove stupid NewRelic tracking code that Bitbucket injects in hosted pages *waves fist* */
-  for(elem in script=document.head.getElementsByTagName("script"))
-  {
-    if(typeof script[elem]==="object" && script[elem].outerHTML.match(/NR/))
-    {
-      console.log(script[elem].outerHTML.match(/NR/), typeof script[elem]);
-      script[elem].parentElement.removeChild(script[elem]);
-    }
-  }
  </script>
 </body>
 </html>
