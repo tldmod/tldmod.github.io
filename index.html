@@ -228,13 +228,11 @@
   
   /* make the text-ad banner thing a bit more apparent,
      separating it from the content */
-  #wrap
+  ins.adsbygoogle
   {
-    display: inline-block;
     border: 1px solid;
-    height: 60px;
   }
-  #wrap:after
+  ins.adsbygoogle:after
   {
     display: inline-block;
     font-size: x-small;
@@ -247,6 +245,7 @@
     border-radius: 0 0 10px 0;
     padding: 1px 8px;
     float: left;
+    margin-top: -4px;
     margin-left: -1px;
   }
  </style>
@@ -364,13 +363,11 @@
 
  <!-- testing the addition of a small ad, just for kicks -->
  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
- <div id=wrap>
  <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-2054328004027360"
       data-ad-slot="2739187532"
       data-ad-format="auto" role="banner"></ins>
- </div>
  <script>
    (adsbygoogle = window.adsbygoogle || []).push({});
  </script>
