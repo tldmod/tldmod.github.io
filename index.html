@@ -412,7 +412,7 @@
   window.onchange({ target: {id: cur} });
 
   /* we'll show a different description if we are on a mac and want warband */
-  if (navigator.platform.toLowerCase().contains("mac"))
+  if (navigator.platform.toLowerCase().indexOf("mac") !== -1)
   {
     document.documentElement.classList.add('mac');
   }
