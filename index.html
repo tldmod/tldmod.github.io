@@ -179,13 +179,19 @@
     background-repeat: no-repeat;
   }
 
-  .if-wb if-mb, /* if we want warband don't show mb1011 */
-  .if-mb if-wb, /* if we want mb1011 don't show warband */
-  .if-mb mac,   /* if we want mb1011 don't show mac txt */
+  .if-wb       if-mb, /* if we want warband don't show mb1011 */
+  .if-mb       if-wb, /* if we want mb1011 don't show warband */
+                 mac, /* don't show me mac text by default :) */
+  .if-wb.mac not-mac  /* don't show the other wb stuff in mac */
   {
     display: none;
   }
 
+  /* show only the mac notice if warband is selected */
+  .if-wb.mac mac
+  {
+    display: block;
+  }
   #links
   {
     text-align:center;
@@ -326,7 +332,7 @@
 
   <p>
     <b><em>To install:</em></b>
-
+    <not-mac>
     Extract them sequentially, dragging and dropping a <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> directory inside of the
 
     <!-- if you think that those *blank comments* are a bit fishy and unsightly, welcome to utopia land!
@@ -347,9 +353,10 @@
 
     Then just select the mod from the launcher's drop-down list and play.
     
+    </not-mac>
     <!-- here's our mac notice, for those stylish special snowflakes -->
-    <mac>
-     Mac OS X users have the buggiest version of the game, a few workarounds are needed to play our mod, <a href="http://steamcommunity.com/workshop/filedetails/discussion/299974223/361787186436486677/#forum_op_361787186436486677">follow our Mac installation guide.</a>
+    <mac><!--
+   -->Mac OS X users have the buggiest version of the game, a few workarounds are needed to play our mod, <a href="http://steamcommunity.com/workshop/filedetails/discussion/299974223/361787186436486677/#forum_op_361787186436486677">follow our Mac installation guide.</a>
     </mac>
   </p>
 
