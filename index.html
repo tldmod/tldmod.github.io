@@ -179,11 +179,9 @@
     background-repeat: no-repeat;
   }
 
-  .if-wb if-mb
-  {
-    display: none;
-  }
-  .if-mb if-wb
+  .if-wb if-mb, /* if we want warband don't show mb1011 */
+  .if-mb if-wb, /* if we want mb1011 don't show warband */
+  .if-mb mac,   /* if we want mb1011 don't show mac txt */
   {
     display: none;
   }
@@ -340,7 +338,7 @@
   --></if-mb><!--
 
   --><if-wb>
-      <abbr title='By default the game is installed either in &#10;  «C:\Program Files (x86)\Steam\SteamApps\common\mountblade warband\modules\»&#10; for the Steam version or &#10;  «C:\Program Files (x86)\Mount&amp;Blade Warband\modules\»&#10; for the standalone version.'>
+      <abbr title='By default the game is installed either in &#10;  «C:\Program Files (x86)\Steam\SteamApps\common\mountblade warband\modules\»&#10; for the Steam version or &#10;  «C:\Program Files (x86)\Mount&amp;Blade Warband\modules\»&#10; for the standalone version. &#10; Linux users who use Steam should install it in «~/.steam/steam/steamapps/common/MountBlade Warband/Modules»'>
        <em>Modules</em> folder of the game<!--
     --></abbr><!--
   --></if-wb>, overwriting time after time.
@@ -348,6 +346,11 @@
     <if-mb>Once you are done, navigate into the <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if-mb>
 
     Then just select the mod from the launcher's drop-down list and play.
+    
+    <!-- here's our mac notice, for those stylish special snowflakes -->
+    <mac>
+     Mac OS X users have the buggiest version of the game, a few workarounds are needed to play our mod, <a href="http://steamcommunity.com/workshop/filedetails/discussion/299974223/361787186436486677/#forum_op_361787186436486677">follow our Mac installation guide.</a>
+    </mac>
   </p>
 
   <nav>
@@ -395,11 +398,17 @@
   }
 
   /* hacky workaround to get it working at loading time, hell yeah! */
-  var cur = localStorage["selected_instruction"] || "mb";
+  var cur = localStorage["selected_instruction"] || "wb";
 
   document.getElementById(cur).click();
   window.onchange({ target: {id: cur} });
 
+  /* we'll show a different description if we are on a mac and want warband */
+  if (navigator.platform.toLowerCase().contains("mac"))
+  {
+    document.documentElement.classList.add('mac');
+  }
+  
   /* swyter-- tiny custom made json callback, don't judge me :) */
   function shitty_jsonp(url, callback)
   {
