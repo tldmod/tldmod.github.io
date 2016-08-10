@@ -526,8 +526,8 @@
                                                                    ( "0" +      wb_date.getDate()   ).substr(-2);
 
       /* replace the static links with the latest scrapped ones */
-      document.getElementById("nightly_link_mab1011").href = "https://bitbucket.org" + mb_href;
-      document.getElementById("nightly_link_warband").href = "https://bitbucket.org" + wb_href;
+      document.getElementById("nightly_link_mab1011").href = "https://bitbucket.org" + mb_href.trim();
+      document.getElementById("nightly_link_warband").href = "https://bitbucket.org" + wb_href.trim();
     }
 
     else
