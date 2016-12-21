@@ -564,31 +564,33 @@
  {
     lang_lut =
     {
-      Spanish: "es",
-      Russian: "ru",
-     Japanese: "ja",
-       German: "de",
-       French: "fr",
-      Italian: "it",
-       Polish: "pl",
-      Turkish: "tr",
-      Chinese: "zh",
-        Czech: "cz",
-       Korean: "kr"
+      English: 'en',
+      Spanish: 'es',
+      Russian: 'ru',
+     Japanese: 'ja',
+       German: 'de',
+       French: 'fr',
+      Italian: 'it',
+       Polish: 'pl',
+      Turkish: 'tr',
+      Chinese: 'zh',
+        Czech: 'cz',
+       Korean: 'kr'
     }
-    
+
     window.lang_perc = {};
-  
-  
+
+    /* pretty, huh? i know! */
     for(i of json.contents.match(/v:'[^']+'},{v:\d+/g))
     {
-      var tmp = i.substr(3).split(`'},{v:`);
-      
-      lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
-      
-      console.log(i, tmp, lang_perc, lang_perc[lang_lut[tmp[0]]])
+      var tmp = i.substr(3).split(`'},{v:`); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
     }
     
+    console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
+    
+    for (a of document.querySelectorAll("#lang > li"))
+        console.log(a, a.lang, lang_perc[a.lang])
+  });
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed', lang_perc)
 
     for (a of document.querySelectorAll("#lang > li"))
