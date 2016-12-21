@@ -562,7 +562,7 @@
   /* new! update the translation percentages live with some trickery! */
   shitty_jsonp("https://www.transifex.com/_/charts/js/tld/tld/json/", function(json)
   {
-    for(i of json.content.match(/v:'[^']+'},{v:\d+/g))
+    for(i of json.contents.match(/v:'[^']+'},{v:\d+/g))
       console.log(i, i.substr(2).split(`'},{v:`))
   });
 
