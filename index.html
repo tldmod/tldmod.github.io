@@ -292,8 +292,9 @@
      <li lang=de>Deutsch</li>
      <li lang=ja>日本語</li>
      <li lang=ru>Русский</li>
+     <li lang=it>Italiano (97%)</li>
      <li lang=pl>Polski (95%)</li>
-     <li lang=it>Italiano (87%)</li>
+     <li lang=pl>Türkçe (78%)</li>
      <li>
       <a href=https://transifex.com/projects/p/tld/ target=tab>Want to contribute?</a>
      </li>
@@ -560,7 +561,6 @@
   });
 
  /* new! update the translation percentages live with some trickery! */
- /* new! update the translation percentages live with some trickery! */
  shitty_jsonp("https://www.transifex.com/_/charts/js/tld/tld/json/", function(json)
  {
     lang_lut =
@@ -581,7 +581,7 @@
 
     window.lang_perc = {};
 
-    /* pretty, huh? i know! */
+    /* pretty, huh? i know! :( fight hacks with hacks! >:) */
     for(i of json.contents.match(/v:'[^']+'},{v:\d+/g))
     {
       var tmp = i.substr(3).split(`'},{v:`); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
@@ -589,12 +589,13 @@
 
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
 
-    for (a of document.querySelectorAll("#lang > li[lang]"))
+    for (elem of document.querySelectorAll("#lang > li[lang]"))
     {
-      console.log(a, a.lang, lang_perc[a.lang], a.textContent, !!(a.textContent.indexOf('%') !== -1), parseInt(a.textContent.match(/\d+/)) )
+      console.log(elem, elem.lang, lang_perc[elem.lang], elem.textContent, !!(elem.textContent.indexOf('%') !== -1))
 
-      if ((!!(a.textContent.indexOf('%') !== -1)) && parseInt(a.textContent.match(/\d+/)) < lang_perc[a.lang])
-        a.textContent = a.textContent.replace(/\d+/, lang_perc[a.lang])
+      /* does it have a percentage? is that percentage smaller than the one we just got? replace it! */
+      if ((!!(elem.textContent.indexOf('%') !== -1)) && parseInt(elem.textContent.match(/\d+/)) < lang_perc[elem.lang])
+        elem.textContent = elem.textContent.replace(/\d+/, lang_perc[elem.lang])
     }
   });
 
