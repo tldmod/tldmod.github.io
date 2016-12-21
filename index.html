@@ -585,11 +585,18 @@
     {
       var tmp = i.substr(3).split(`'},{v:`); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
     }
+  
+    lang_perc["pl"] = 110
 
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
 
     for (a of document.querySelectorAll("#lang > li[lang]"))
-        console.log(a, a.lang, lang_perc[a.lang], a.textContent)
+    {
+      console.log(a, a.lang, lang_perc[a.lang], a.textContent, !!(a.textContent.indexOf('%') !== -1))
+    
+      if (!!(a.textContent.indexOf('%') !== -1))
+        a.textContent = a.textContent.replace(/\d+/, lang_perc[a.lang])
+    }
   });
 
   /*
