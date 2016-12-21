@@ -559,12 +559,48 @@
 
   });
 
-  /* new! update the translation percentages live with some trickery! */
-  shitty_jsonp("https://www.transifex.com/_/charts/js/tld/tld/json/", function(json)
-  {
+ /* new! update the translation percentages live with some trickery! */
+ shitty_jsonp("https://www.transifex.com/_/charts/js/tld/tld/json/", function(json)
+ {
+    lang_lut =
+    {
+                      Spanish: "es",
+                      Russian: "ru",
+                     Japanese: "ja",
+                       German: "de",
+                       French: "fr",
+        "English":             "en",
+        "Italian":             "it",
+        "Polish":              "pl",
+        "Turkish":             "tr",
+        "Portuguese (Brazil)": "br",
+        "Chinese":             "zh",
+        "Czech":               "cz",
+        "Chinese (Taiwan)":    "tw",
+        "Korean":              "kr"
+    }
+    
+    window.lang_perc = {};
+  
+  
     for(i of json.contents.match(/v:'[^']+'},{v:\d+/g))
-      console.log(i, i.substr(2).split(`'},{v:`))
+    {
+      var tmp = i.substr(3).split(`'},{v:`);
+      
+      lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
+      
+      console.log(i, tmp, lang_perc, lang_perc[lang_lut[tmp[0]]])
+    }
+    
+    console.log('[!!] the Transifex language completion stats have been retrieved and parsed', lang_perc)
+
+    for (a of document.querySelectorAll("#lang > li"))
+        console.log(a)
   });
+
+		console.log(a)
+ });
+
 
 
   /*
