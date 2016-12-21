@@ -585,11 +585,11 @@
     {
       var tmp = i.substr(3).split(`'},{v:`); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
     }
-    
+
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
-    
-    for (a of document.querySelectorAll("#lang > li"))
-        console.log(a, a.lang, lang_perc[a.lang])
+
+    for (a of document.querySelectorAll("#lang > li[lang]"))
+        console.log(a, a.lang, lang_perc[a.lang], a.textContent)
   });
 
   /*
