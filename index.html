@@ -482,7 +482,7 @@
   {
     console.log("Starting to scrape the TLD downloads page & table!\n");
    
-    if (e.target.statusText != 'OK' || !e.target.response || !e.target.response.values)
+    if ((e.target.statusText != 'OK' && e.target.status != 200) || !e.target.response || !e.target.response.values)
     {
        console.error("[!] There was a network/API problem\n", e); return;
     }
