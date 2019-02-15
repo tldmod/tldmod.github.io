@@ -38,24 +38,24 @@
 
   html
   {
-    background:#221A18;
-    color:#985;
-    text-shadow:2px 1px black;
+    background: #221A18;
+    color: #985;
+    text-shadow: 2px 1px black;
     font-family:cursive;
 
-            user-select:none;
-    -webkit-user-select:none;
-       -moz-user-select:none;
-         -o-user-select:none;
+            user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+         -o-user-select: none;
 
-    cursor:default !important;
+    cursor: default !important;
     font-family: 'Merriweather', garamond, georgia, times, serif;
 
     background-image: url(img/swyTLDprofile.bg.jpg);
-    height:100%;
-    width: 100%;
     height: 100%;
-    background-repeat:no-repeat;
+    width:  100%;
+    height: 100%;
+    background-repeat: no-repeat;
   }
 
   /* for screens wider than the background image */
@@ -67,7 +67,21 @@
       background-size: cover;
     }
   }
-
+  /* swy: hide the language completion percentages when there isn't enough space */
+  @media(max-width: 620px)
+  {
+    li span { display: none !important; }
+  }
+  /* swy: also; reduce the amount of language rows as we run out of room */
+  @media(max-width: 466px)
+  {
+    ul { column-count: 2 !important; }
+  }
+  @media(max-width: 340px)
+  {
+    ul { column-count: 1 !important; }
+  }
+  
   a[href]
   {
     color:inherit;
@@ -75,9 +89,20 @@
 
   body
   {
-    max-width:620px;
-    margin:0 auto;
-    padding:25px;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 25px;
+  }
+
+  /* swy: stole this from here: https://stackoverflow.com/a/6509239/674685 */
+  ul
+  {
+       -moz-column-count: 3;
+       -moz-column-gap:   20px;
+    -webkit-column-count: 3;
+    -webkit-column-gap:   20px;
+            column-count: 3;
+            column-gap:   20px;
   }
 
   ul li
@@ -133,7 +158,20 @@
   {
     background-image: url(img/tr.png);
   }
-
+  #lang li[lang='zh-Hans']:before,
+  #lang li[lang='zh-Hant']:before
+  {
+    background-image: url(img/zh.png);
+  }
+  #lang li[lang=pt-BR]:before
+  {
+    background-image: url(img/br.png);
+  }
+  #lang li[lang=sk]:before
+  {
+    background-image: url(img/sk.png);
+  }
+  
   #ul
   {
     list-style: none;
@@ -298,11 +336,15 @@
      <li lang=de>Deutsch</li>
      <li lang=ja>日本語</li>
      <li lang=ru>Русский</li>
-     <li lang=it>Italiano (97%)</li>
-     <li lang=pl>Polski (95%)</li>
-     <li lang=tr>Türkçe (78%)</li>
+     <li lang=it>Italiano</li>
+     <li lang=pl>Polski</li>
+     <li lang=tr>Türkçe</li>
+     <li lang=pt-BR>Brasileiro</li>
+     <li lang=zh-Hans>简体中文</li>
+     <li lang=zh-Hant>繁体中文</li>
+     <li lang=sk>Slovenčina</li>
      <li>
-      <a href=https://transifex.com/projects/p/tld/ target=tab>Want to contribute?</a>
+      <a href=https://transifex.com/projects/p/tld/ target=tab title='Contribute your time and help us localizing.'>Want to contribute?</a>
      </li>
   </ul>
  </section>
@@ -421,12 +463,12 @@
 
   /* set either the `.if_wb` or the `.if_mb` class to the root element,
      so that the css picks it up and conditionally hides whatever it needs to */
-  window.onchange=function(e)
+  window.onchange = function(e)
   {
     localStorage["selected_instruction"] = e.target.id;
 
-    document.documentElement.classList.add(   e.target.id=="wb" ? "if-wb" : "if-mb");
-    document.documentElement.classList.remove(e.target.id=="wb" ? "if-mb" : "if-wb");
+    document.documentElement.classList.add   (e.target.id == "wb" ? "if-wb" : "if-mb");
+    document.documentElement.classList.remove(e.target.id == "wb" ? "if-mb" : "if-wb");
   }
 
   /* hacky workaround to get it working at loading time, hell yeah! */
@@ -449,14 +491,10 @@
     this.window[random_id] = function(json)
     {
       if(typeof callback === "function")
-      {
         callback.apply(this, arguments);
-      }
-
       else
-      {
         throw "you suck! a callback function soup is needed to run this!";
-      }
+
 
       /* remove the temp script thingie */
       document.head.removeChild(jsonp);
@@ -546,37 +584,43 @@
  {
     lang_lut =
     {
-      English: 'en',
-      Spanish: 'es',
-      Russian: 'ru',
-     Japanese: 'ja',
-       German: 'de',
-       French: 'fr',
-      Italian: 'it',
-       Polish: 'pl',
-      Turkish: 'tr',
-      Chinese: 'zh',
-        Czech: 'cz',
-       Korean: 'kr'
+                  'English': 'en',
+                  'Spanish': 'es',
+                  'Russian': 'ru',
+                 'Japanese': 'ja',
+                   'German': 'de',
+                   'French': 'fr',
+                  'Italian': 'it',
+                   'Polish': 'pl',
+                  'Turkish': 'tr',
+                  'Chinese': 'zh',
+                    'Czech': 'cz',
+                   'Korean': 'kr',
+                   'Slovak': 'sk',
+      'Portuguese (Brazil)': 'pt-BR',
+       'Chinese Simplified': 'zh-Hans',
+         'Chinese (Taiwan)': 'zh-Hant'
     }
 
     window.lang_perc = {};
 
-    /* pretty, huh? i know! :( fight hacks with hacks! >:) */
-    for(i of json.contents.match(/v:'[^']+'},{v:\d+/g))
+    /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
+    for(var i of json.contents.match(/v:'[^']+'},{v:\d+/g))
     {
+
       var tmp = i.substr(3).split(`'},{v:`); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
+        console.log(tmp[0], lang_lut[tmp[0]]);
     }
 
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
 
-    for (elem of document.querySelectorAll("#lang > li[lang]"))
+    for (var elem of document.querySelectorAll("#lang > li[lang]"))
     {
       console.log(elem, elem.lang, lang_perc[elem.lang], elem.textContent, !!(elem.textContent.indexOf('%') !== -1))
 
-      /* does it have a percentage? is that percentage smaller than the one we just got? replace it! */
-      if ((!!(elem.textContent.indexOf('%') !== -1)) && parseInt(elem.textContent.match(/\d+/)) < lang_perc[elem.lang])
-        elem.textContent = elem.textContent.replace(/\d+/, lang_perc[elem.lang])
+      /* swy: now they don't have a percentage by default; unless they need them */
+      if (lang_perc[elem.lang] < 100)
+        elem.innerHTML += `<span> (${lang_perc[elem.lang]}%)</span>`;
     }
   });
  </script>
