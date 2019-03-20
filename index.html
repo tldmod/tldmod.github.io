@@ -118,6 +118,9 @@
     width: 16px;
     height: 11px;
     margin-right: 5px;
+    image-rendering: -moz-crisp-edges; /* swy: old firefox; go figure */
+    image-rendering: crisp-edges;      /* swy: firefox but not chrome */
+    image-rendering: pixelated;        /* swy: chrome but not firefox */
   }
 
   /* shitty CSS3 implementations ftw! */
