@@ -33,6 +33,9 @@
  <!-- keep /index.html out of the picture, just in case -->
  <link rel=canonical href='https://tldmod.github.io/'>
  
+ <!-- swy: preload the Google font domain; fast -->
+ <link href='https://fonts.gstatic.com' rel=preconnect crossorigin>
+ 
  <style>
   @import url(https://fonts.googleapis.com/css?family=Merriweather:400,400italic&display=swap);
 
@@ -611,7 +614,7 @@
     for(var i of json.contents.match(/v:'[^']+'},{v:\d+/g))
     {
 
-      var tmp = i.substr(3).split(`'},{v:`); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
+      var tmp = i.substr(3).split("'},{v:"); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
         console.log(tmp[0], lang_lut[tmp[0]]);
     }
 
@@ -623,7 +626,7 @@
 
       /* swy: now they don't have a percentage by default; unless they need them */
       if (lang_perc[elem.lang] < 100)
-        elem.innerHTML += `<span> (${lang_perc[elem.lang]}%)</span>`;
+        elem.innerHTML += '<span> (' + lang_perc[elem.lang] + '%)</span>';
     }
   });
  </script>
