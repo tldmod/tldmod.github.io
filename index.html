@@ -73,18 +73,40 @@
   /* swy: hide the language completion percentages when there isn't enough space */
   @media(max-width: 620px)
   {
-    #languages li span { display: none !important; }
+    #languages li span { display: none !important; column-gap: 0; }
   }
   /* swy: also; reduce the amount of language rows as we run out of room */
   @media(max-width: 466px)
   {
-    ul { column-count: 2 !important; }
+    ul
+	{
+	  -webkit-column-count: 2 !important;
+              column-count: 2 !important;
+	          column-count: 2 !important; padding: 0 14px;
+	}
+	
+	#languages li span { display: inline !important; color: darkgoldenrod; }
   }
-  @media(max-width: 340px)
+  @media(max-width: 400px)
   {
-    ul { column-count: 1 !important; }
+	p[style]
+	{
+		height: 26px !important; margin-top: 26px !important;
+		margin-bottom: 45px !important;
+		margin-top: -23px;
+	}
+	legend { margin: 0 38px !important; }
   }
-  
+  @media(max-width: 320px)
+  {
+    ul
+	{
+	  -webkit-column-count: 1 !important;
+              column-count: 1 !important;
+			  column-count: 1 !important; padding: 0 32px;
+	}
+  }
+    
   a[href]
   {
     color:inherit;
@@ -370,7 +392,7 @@
   <if-wb><not-mac>
    <p><a target=_blank href=https://steamcommunity.com/sharedfiles/filedetails/?id=299974223#profileBlock>Subscribe to the Steam Workshop version</a> to get automatic updates.</p>
    <p><i>(Remember to wait until the big download has completed before playing the mod!)</i></p>
-   <p style="text-align: center; border-bottom: 1px solid; height: 14px; margin-bottom: 36px;"><legend style="display: inline-block; background: rgba(34, 26, 24, 0.85) none repeat scroll 0% 0%; padding-left: 20px; padding-right: 20px; border-radius: 7px; border: 1px solid;">Or just download it manually...</legend></p>
+   <p style="text-align: center; border-bottom: 1px solid; height: 14px; margin-bottom: 36px;"><legend style="display: inline-table; margin: 0 auto; background: rgba(34, 26, 24, 0.85) none repeat scroll 0% 0%; padding-left: 20px; padding-right: 20px; border-radius: 7px; border: 1px solid;">Or just download it manually...</legend></p>
   </not-mac></if-wb>
   <ol>
     <li>Latest standalone version of the mod for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> — <em>TLD_3.5<if-wb>_wb</if-wb>.7z</em>
@@ -514,6 +536,18 @@
 
     document.head.appendChild(jsonp);
   }
+  
+  /* swy: guess what? older browsers like android 4.4.2 don't support for (var i of x) constructs */
+  function for_of_shim(iterate, callback)
+  {
+   	for (var elem in iterate)
+   	{
+		if (!iterate.hasOwnProperty(elem))
+			continue;
+			
+		callback(iterate[elem]);
+	}
+  }
 
   /* here's the real meal V */
   xhr = new XMLHttpRequest();
@@ -522,17 +556,28 @@
   xhr.addEventListener('loadend', function(e)
   {
     console.log("Starting to scrape the TLD downloads page & table!\n");
-   
-    if ((e.target.statusText != 'OK' && e.target.status != 200) || !e.target.response || !e.target.response.values)
+    console.log(e.target, e.target.status, e.target.response);
+	
+	
+	if (e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
+	{
+		console.log("[w] manually parsing JSON response as fallback:", e.target);
+		var iterate = JSON.parse(e.target.responseText).values;
+	}
+    else if ((e.target.statusText != 'OK' && e.target.status != 200) || !e.target.response || !e.target.response.values)
     {
-       console.error("[!] There was a network/API problem\n", e); return;
+      console.error("[!] There was a network/API problem\n", e); return;
+    }
+    else
+	{
+    	var iterate = e.target.response.values
     }
     
     /* default paleolithic date to compare against */
     window.mb_date = new Date("1992-01-01");
     window.wb_date = new Date("1992-01-01");
   
-    for (var entry of e.target.response.values)
+    for_of_shim (iterate, function(entry)
     {
       var cur_date = new Date(entry.created_on);
       var cur_href = entry.links.self.href;
@@ -550,8 +595,7 @@
         window.wb_date = cur_date;
         window.wb_href = cur_href;
       }
-       
-    }
+    })
     
     console.log("Finished!\n--");
 
@@ -611,23 +655,22 @@
     window.lang_perc = {};
 
     /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
-    for(var i of json.contents.match(/v:'[^']+'},{v:\d+/g))
+    for_of_shim (json.contents.match(/v:'[^']+'},{v:\d+/g), function(i)
     {
-
       var tmp = i.substr(3).split("'},{v:"); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
         console.log(tmp[0], lang_lut[tmp[0]]);
-    }
+    })
 
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
 
-    for (var elem of document.querySelectorAll("#lang > li[lang]"))
+    for_of_shim (document.querySelectorAll("#lang > li[lang]"), function(elem)
     {
       console.log(elem, elem.lang, lang_perc[elem.lang], elem.textContent, !!(elem.textContent.indexOf('%') !== -1))
 
       /* swy: now they don't have a percentage by default; unless they need them */
       if (lang_perc[elem.lang] < 100)
         elem.innerHTML += '<span> (' + lang_perc[elem.lang] + '%)</span>';
-    }
+    })
   });
  </script>
 </body>
