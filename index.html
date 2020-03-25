@@ -79,32 +79,32 @@
   @media(max-width: 466px)
   {
     ul
-	{
-	  -webkit-column-count: 2 !important;
+    {
+      -webkit-column-count: 2 !important;
               column-count: 2 !important;
-	          column-count: 2 !important; padding: 0 14px;
-	}
-	
-	#languages li span { display: inline !important; color: darkgoldenrod; }
+              column-count: 2 !important; padding: 0 14px;
+    }
+    
+    #languages li span { display: inline !important; color: darkgoldenrod; }
   }
   @media(max-width: 400px)
   {
-	p[style]
-	{
-		height: 26px !important; margin-top: 26px !important;
-		margin-bottom: 45px !important;
-		margin-top: -23px;
-	}
-	legend { margin: 0 38px !important; }
+    p[style]
+    {
+        height: 26px !important; margin-top: 26px !important;
+        margin-bottom: 45px !important;
+        margin-top: -23px;
+    }
+    legend { margin: 0 38px !important; }
   }
   @media(max-width: 320px)
   {
     ul
-	{
-	  -webkit-column-count: 1 !important;
+    {
+      -webkit-column-count: 1 !important;
               column-count: 1 !important;
-			  column-count: 1 !important; padding: 0 32px;
-	}
+              column-count: 1 !important; padding: 0 32px;
+    }
   }
     
   a[href]
@@ -540,13 +540,13 @@
   /* swy: guess what? older browsers like android 4.4.2 don't support for (var i of x) constructs */
   function for_of_shim(iterate, callback)
   {
-   	for (var elem in iterate)
-   	{
-		if (!iterate.hasOwnProperty(elem))
-			continue;
-			
-		callback(iterate[elem]);
-	}
+    for (var elem in iterate)
+    {
+      if (!iterate.hasOwnProperty(elem))
+        continue;
+            
+      callback(iterate[elem]);
+    }
   }
 
   /* here's the real meal V */
@@ -557,21 +557,18 @@
   {
     console.log("Starting to scrape the TLD downloads page & table!\n");
     console.log(e.target, e.target.status, e.target.response);
-	
-	
-	if (e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
-	{
-		console.log("[w] manually parsing JSON response as fallback:", e.target);
-		var iterate = JSON.parse(e.target.responseText).values;
-	}
+    
+    if (e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
+    {
+      console.log("[w] manually parsing JSON response as fallback:", e.target);
+      var iterate = JSON.parse(e.target.responseText).values;
+    }
     else if ((e.target.statusText != 'OK' && e.target.status != 200) || !e.target.response || !e.target.response.values)
     {
       console.error("[!] There was a network/API problem\n", e); return;
     }
     else
-	{
-    	var iterate = e.target.response.values
-    }
+      var iterate = e.target.response.values
     
     /* default paleolithic date to compare against */
     window.mb_date = new Date("1992-01-01");
@@ -601,19 +598,19 @@
 
     if (window.wb_href && window.mb_href)
     {
-      console.log("latest Warband nightly URL: "+ wb_href +", uploaded on "+ wb_date);
-      console.log("latest MB 1011 nightly URL: "+ mb_href +", uploaded on "+ mb_date);
+      console.log('latest Warband nightly URL: ' + wb_href + ', uploaded on ' + wb_date);
+      console.log('latest MB 1011 nightly URL: ' + mb_href + ', uploaded on ' + mb_date);
 
       /* probably a fine example of why js sucks,
          try to format dates in a compact way w/o ending churning out spaguetti code */
 
-      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + "/" +
-                                                                   ( "0" + (1 + mb_date.getMonth()) ).substr(-2) + "/" +
-                                                                   ( "0" +      mb_date.getDate()   ).substr(-2);
+      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + '/' +
+                                                                   ( '0' + (1 + mb_date.getMonth()) ).substr(-2) + '/' +
+                                                                   ( '0' +      mb_date.getDate()   ).substr(-2);
 
-      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + "/" +
-                                                                   ( "0" + (1 + wb_date.getMonth()) ).substr(-2) + "/" +
-                                                                   ( "0" +      wb_date.getDate()   ).substr(-2);
+      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + '/' +
+                                                                   ( '0' + (1 + wb_date.getMonth()) ).substr(-2) + '/' +
+                                                                   ( '0' +      wb_date.getDate()   ).substr(-2);
 
       /* replace the static links with the latest scrapped ones */
       document.getElementById("nightly_link_mab1011").href = mb_href.trim();
