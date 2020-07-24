@@ -395,29 +395,29 @@
    <p style="text-align: center; border-bottom: 1px solid; height: 14px; margin-bottom: 36px;"><legend style="display: inline-table; margin: 0 auto; background: rgba(34, 26, 24, 0.85) none repeat scroll 0% 0%; padding-left: 20px; padding-right: 20px; border-radius: 7px; border: 1px solid;">Or just download it manually...</legend></p>
   </not-mac></if-wb>
   <ol>
-    <li>Latest standalone version of the mod for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> — <em>TLD_3.5<if-wb>_wb</if-wb>.7z</em>
+    <li>Latest standalone version of the mod for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> — <em>TLD_3.6<if-wb>_wb</if-wb>.7z</em>
       <span>
         Download from
        <if-mb>
-        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.5.7z>Bitbucket</a> or
-        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-35-for-mb-1011#subheader>ModDB</a>.
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6.7z>Bitbucket</a> or
+        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-36-for-mb-1011#subheader>ModDB</a>.
        </if-mb>
        <if-wb>
-        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.5_wb.7z>Bitbucket</a> or
-        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-35-for-warband#subheader>ModDB</a>.
+        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_wb.7z>Bitbucket</a> or
+        <a href=http://www.moddb.com/mods/the-last-days/downloads/the-last-days-of-the-third-age-36-for-warband#subheader>ModDB</a>.
        </if-wb>
       </span>
     </li>
     <li>
-      Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2017/10/06 *checking*</em></if-wb><!--
-                                                                                     --><if-mb><em id=nightly_date_mab1011>2017/10/06 *checking*</em></if-mb>)
+      Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2020/07/24 *checking*</em></if-wb><!--
+                                                                                     --><if-mb><em id=nightly_date_mab1011>2020/07/24 *checking*</em></if-mb>)
       <span>
         Download from
         <if-wb>
-          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.5_wb_nightly_patch_2017.10.06-20.30_r2407.7z id=nightly_link_warband>Bitbucket</a>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_wb_nightly_patch_2020.07.24-17.59_r3283.7z id=nightly_link_warband>Bitbucket</a>
         </if-wb>
         <if-mb>
-          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.5_nightly_patch_2017.10.06-20.30_r2407.7z id=nightly_link_mab1011>Bitbucket</a>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_nightly_patch_2020.07.24-17.59_r3283.7z id=nightly_link_mab1011>Bitbucket</a>
         </if-mb>
         <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
       </span>
@@ -580,14 +580,14 @@
       var cur_href = entry.links.self.href;
 
       /* mab1011 link? */
-      if (cur_href.indexOf("TLD_3.5_nightly_patch_") != -1 && +cur_date > +window.mb_date)
+      if (cur_href.indexOf("TLD_3.6_nightly_patch_") != -1 && +cur_date > +window.mb_date)
       {
         window.mb_date = cur_date;
         window.mb_href = cur_href;
       }
 
       /* warband link? */
-      else if (cur_href.indexOf("TLD_3.5_wb_nightly_patch_") != -1 && +cur_date > +window.wb_date)
+      else if (cur_href.indexOf("TLD_3.6_wb_nightly_patch_") != -1 && +cur_date > +window.wb_date)
       {
         window.wb_date = cur_date;
         window.wb_href = cur_href;
