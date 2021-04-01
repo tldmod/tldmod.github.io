@@ -216,6 +216,9 @@
     background-repeat: no-repeat;
     padding-left: 36px;
     height: 32px;
+    image-rendering: -moz-crisp-edges; /* swy: old firefox; go figure */
+    image-rendering: crisp-edges;      /* swy: firefox but not chrome */
+    image-rendering: pixelated;        /* swy: chrome but not firefox */
   }
 
   #mab1011
@@ -252,6 +255,9 @@
     padding-bottom: 20px;
     background-image: url(img/download.gif);
     background-repeat: no-repeat;
+    image-rendering: -moz-crisp-edges; /* swy: old firefox; go figure */
+    image-rendering: crisp-edges;      /* swy: firefox but not chrome */
+    image-rendering: pixelated;        /* swy: chrome but not firefox */
   }
 
   .if-wb       if-mb, /* if we want warband don't show mb1011 */
