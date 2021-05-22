@@ -214,11 +214,9 @@
   {
     display: inline-block;
     background-repeat: no-repeat;
+    background-size: contain;
     padding-left: 36px;
     height: 32px;
-    image-rendering: -moz-crisp-edges; /* swy: old firefox; go figure */
-    image-rendering: crisp-edges;      /* swy: firefox but not chrome */
-    image-rendering: pixelated;        /* swy: chrome but not firefox */
   }
 
   #mab1011
@@ -230,6 +228,24 @@
   {
     background-image: url(img/icon-warband.png);
   }
+
+@media only screen and ( -webkit-min-device-pixel-ratio: 1.1 ),   /* swy: HiDPI versions of the logo that kick in when we surpass 100%/96PPI: */
+       only screen and (    min--moz-device-pixel-ratio: 1.1 ),   /*      https://stackoverflow.com/a/24639219/674685                         */
+       only screen and (      -o-min-device-pixel-ratio: 2.6/2 ), /* returns 1.3, see Dev.Opera */
+       only screen and (         min-device-pixel-ratio: 1.1 ),
+       only screen and ( min-resolution: 97dpi ),
+       only screen and ( min-resolution: 1.3dppx )
+{
+  #mab1011
+  {
+    background-image: url(img/icon-mab1011-hires.png);
+  }
+
+  #warband
+  {
+    background-image: url(img/icon-warband-hires.png);
+  }
+}
 
   input
   {
