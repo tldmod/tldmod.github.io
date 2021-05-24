@@ -426,7 +426,7 @@
   </label>
 
   <if-wb><not-mac>
-   <p><a target=_blank href=https://steamcommunity.com/sharedfiles/filedetails/?id=299974223#profileBlock>Subscribe to the Steam Workshop version</a> to get automatic updates.</p>
+   <p><a target=_blank href='https://steamcommunity.com/sharedfiles/filedetails/?id=299974223#profileBlock'>Subscribe to the Steam Workshop version</a> to get automatic updates.</p>
    <p><i>(Remember to wait until the big download has completed before playing the mod!)</i></p>
    <p style="text-align: center; border-bottom: 1px solid; height: 14px; margin-bottom: 36px;"><legend style="display: inline-table; margin: 0 auto; background: rgba(34, 26, 24, 0.85) none repeat scroll 0% 0%; padding-left: 20px; padding-right: 20px; border-radius: 7px; border: 1px solid;">Or just download it manually...</legend></p>
   </not-mac></if-wb>
@@ -483,21 +483,23 @@
 
     Then just select the mod from the launcher's drop-down list and play.
      
-    <if-mb>
-     <div id=mab1011warnbox>
-      <b><em>Note:</em></b>
-      Because of the stringent memory requirements, the only supported variant of the original game is <a href='https://www.mbrepository.com/file.php?id=2595' title='Download this version of the game.'>the latest, DRM-free «enhanced version»</a>, with <em>Mount&amp;Blade.exe</em> patched <a href='https://www.techpowerup.com/forums/threads/large-address-aware.112556/' title='Download the suggested LAA patcher program, or do it on your own.'>as large-address aware</a>. The Steam version will not work, alternatively, you can download a pre-patched executable <a href='https://web.archive.org/web/20210524081343if_/https://cdn.discordapp.com/attachments/470890531061366787/846299863527456799/mountblade.exe'>from here</a> and replace the one in the Steam folder. It is the same shareware version, with one (<abbr title='large-address aware field'>LAA</abbr>) bit toggled. No other changes.
-      <br/><br/>
-      Without doing this the game will either crash at startup complaining about texture files or it will crash after surpassing ~1460 MB of RAM.
-     </div>
-    </if-mb>
-    
     </not-mac>
     <!-- here's our mac notice, for those stylish special snowflakes -->
     <mac><!--
    -->Mac OS X users have the buggiest version of the game, a few workarounds are needed to play our mod, <a href="http://steamcommunity.com/workshop/filedetails/discussion/299974223/361787186436486677/#forum_op_361787186436486677">follow our Mac installation guide</a>.
     </mac>
   </p>
+  
+  <if-mb>
+   <div id=mab1011warnbox>
+    <b><em>Note:</em></b>
+    Because of the stringent memory requirements, the only supported variant of the original game is <a href='https://www.mbrepository.com/file.php?id=2595' title='Download this version of the game.'>the latest, DRM-free «enhanced version»</a>, with <em>Mount&amp;Blade.exe</em> patched <a href='https://www.techpowerup.com/forums/threads/large-address-aware.112556/' title='Download the suggested LAA patcher program, or do it on your own.'>as large-address aware</a>.
+    <br/><br/>
+    The Steam version will not work out of the box. Alternatively, you can download a pre-patched executable <a href='https://web.archive.org/web/20210524081343if_/https://cdn.discordapp.com/attachments/470890531061366787/846299863527456799/mountblade.exe'>from here</a> and replace the one in the Steam folder. It is the same shareware version, with one (<abbr title='large-address aware field'>LAA</abbr>) bit toggled. No other changes.
+    <br/><br/>
+    Without doing this the game will either crash at startup complaining about texture files or it will crash after surpassing ~1460 MB of RAM.
+   </div>
+  </if-mb>
 
   <nav>
     <p id=links role=navigation>
