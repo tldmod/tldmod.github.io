@@ -368,6 +368,15 @@
     border: 1px solid;
     border-radius: 4px;
   }
+  
+  div#mab1011warnbox
+  {
+    border: solid;
+    padding: 10px;
+    margin: 8px;
+    background: rgba(205, 133, 63, 0.03);
+    margin-top: 16px;
+  }
  </style>
 </head>
 <body role=main>
@@ -473,11 +482,20 @@
     <if-mb>Once you are done, navigate into the <em><abbr title='The Last Days of the Third Age'>TLD</abbr></em> folder, copy a file called <em>dinput8.dll</em>, go up a few times and paste it next to <em>Mount&amp;Blade.exe</em>, into the game's root.</if-mb>
 
     Then just select the mod from the launcher's drop-down list and play.
+     
+    <if-mb>
+     <div id=mab1011warnbox>
+      <b><em>Note:</em></b>
+      Because of the stringent memory requirements, the only supported variant of the game is <a href='https://www.mbrepository.com/file.php?id=2595' title='Download this version of the game'>the latest, DRM-free «enhanced version»</a>, with <em>Mount&amp;Blade.exe</em> patched <a href='https://www.techpowerup.com/forums/threads/large-address-aware.112556/' title='download the LAA patcher program'>as large-address aware</a>.
+      <br><br>
+      Without doing this the game will either crash at startup complaining about textures or it will crash after surpassing ~1245 MB of RAM.
+     </div>
+    </if-mb>
     
     </not-mac>
     <!-- here's our mac notice, for those stylish special snowflakes -->
     <mac><!--
-   -->Mac OS X users have the buggiest version of the game, a few workarounds are needed to play our mod, <a href="http://steamcommunity.com/workshop/filedetails/discussion/299974223/361787186436486677/#forum_op_361787186436486677">follow our Mac installation guide.</a>
+   -->Mac OS X users have the buggiest version of the game, a few workarounds are needed to play our mod, <a href="http://steamcommunity.com/workshop/filedetails/discussion/299974223/361787186436486677/#forum_op_361787186436486677">follow our Mac installation guide</a>.
     </mac>
   </p>
 
