@@ -675,7 +675,7 @@
   xhr.send();
 
  /* new! update the translation percentages live with some trickery! */
- shitty_jsonp("https://www.transifex.com/_/charts/js/tld/tld/json/", function(json)
+ shitty_jsonp("https://www.transifex.com/_/userspace/ajax/widgets/languages/tld/tld/?all=1", function(json)
  {
     lang_lut =
     {
@@ -698,12 +698,18 @@
     }
 
     window.lang_perc = {};
+    console.log("[i] returned JSON from Transifex:", json.contents, JSON.parse(json.contents));
 
     /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
-    for_of_shim (json.contents.match(/v:'[^']+'},{v:\d+/g), function(i)
+    for_of_shim (JSON.parse(json.contents).languages, function(i)
     {
-      var tmp = i.substr(3).split("'},{v:"); lang_perc[lang_lut[tmp[0]]] = parseInt(tmp[1])
-        console.log(tmp[0], lang_lut[tmp[0]]);
+        lang_perc[lang_lut[i.language_name]] = parseInt(i.translated_strings / (i.translated_strings + i.untranslated_strings) * 100);
+
+        console.log(
+          i.language_code, i.language_name,
+          i.translated_strings, i.untranslated_strings,
+          lang_perc[lang_lut[i.language_name]] + '%'
+        );
     })
 
     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
