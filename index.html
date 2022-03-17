@@ -555,74 +555,48 @@
 
   /* we'll show a different description if we are on a mac and want warband */
   if (navigator.platform.toLowerCase().indexOf("mac") !== -1)
-  {
     document.documentElement.classList.add('mac');
-  }
   
   /* swyter-- tiny custom made json callback, don't judge me :) */
-  function shitty_jsonp(url, callback)
+  function shitty_json_req(url, callback)
   {
-    random_id = "CB" + (+new Date());
-
-    this.window[random_id] = function(json)
+    xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open('GET', url);
+    xhr.addEventListener('loadend', function(e)
     {
-      if(typeof callback === "function")
-        callback.apply(this, arguments);
-      else
-        throw "you suck! a callback function soup is needed to run this!";
+      if (e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
+        if (console.log("[w] manually parsing JSON response as fallback:", e.target))
+          e.target.response = JSON.parse(e.target.responseText);
 
+      if ((e.target.statusText != 'OK' && e.target.status != 200) || !e.target.response)
+        if (console.error("[!] There was a network/API problem\n", e))
+          return;
 
-      /* remove the temp script thingie */
-      document.head.removeChild(jsonp);
-
-      /* remove itself */
-      delete window[random_id];
-    };
-
-    jsonp=document.createElement("script");
-    jsonp.setAttribute("src","https://api.allorigins.win/get?url="+url+"&callback="+random_id);
-
-    document.head.appendChild(jsonp);
+      callback.apply(this, [e.target.response]);
+    });
+    
+    xhr.send();
   }
   
   /* swy: guess what? older browsers like android 4.4.2 don't support for (var i of x) constructs */
   function for_of_shim(iterate, callback)
   {
     for (var elem in iterate)
-    {
-      if (!iterate.hasOwnProperty(elem))
-        continue;
-            
-      callback(iterate[elem]);
-    }
+      if (iterate.hasOwnProperty(elem))
+        callback(iterate[elem]);
   }
 
   /* here's the real meal V */
-  xhr = new XMLHttpRequest();
-  xhr.responseType = 'json';
-  xhr.open('GET', 'https://api.bitbucket.org/2.0/repositories/Swyter/tld-downloads/downloads');
-  xhr.addEventListener('loadend', function(e)
+  shitty_json_req('https://api.bitbucket.org/2.0/repositories/Swyter/tld-downloads/downloads', function(json)
   {
-    console.log("Starting to scrape the TLD downloads page & table!\n");
-    console.log(e.target, e.target.status, e.target.response);
-    
-    if (e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
-    {
-      console.log("[w] manually parsing JSON response as fallback:", e.target);
-      var iterate = JSON.parse(e.target.responseText).values;
-    }
-    else if ((e.target.statusText != 'OK' && e.target.status != 200) || !e.target.response || !e.target.response.values)
-    {
-      console.error("[!] There was a network/API problem\n", e); return;
-    }
-    else
-      var iterate = e.target.response.values
-    
+    console.log("Starting to scrape the TLD downloads page & table!\n", json);
+
     /* default paleolithic date to compare against */
     window.mb_date = new Date("1992-01-01");
     window.wb_date = new Date("1992-01-01");
-  
-    for_of_shim (iterate, function(entry)
+
+    for_of_shim (json.values, function(entry)
     {
       var cur_date = new Date(entry.created_on);
       var cur_href = entry.links.self.href;
@@ -671,58 +645,58 @@
     }
 
   });
-  
-  xhr.send();
 
- /* new! update the translation percentages live with some trickery! */
- shitty_jsonp("https://www.transifex.com/_/userspace/ajax/widgets/languages/tld/tld/?all=1", function(json)
- {
-    lang_lut =
-    {
-                  'English': 'en',
-                  'Spanish': 'es',
-                  'Russian': 'ru',
-                 'Japanese': 'ja',
-                   'German': 'de',
-                   'French': 'fr',
-                  'Italian': 'it',
-                   'Polish': 'pl',
-                  'Turkish': 'tr',
-                  'Chinese': 'zh',
-                    'Czech': 'cz',
-                   'Korean': 'ko',
-                   'Slovak': 'sk',
-      'Portuguese (Brazil)': 'pt-BR',
-       'Chinese Simplified': 'zh-Hans',
-      'Chinese Traditional': 'zh-Hant'
-    }
-
-    window.lang_perc = {};
-    console.log("[i] returned JSON from Transifex:", json.contents, JSON.parse(json.contents));
-
-    /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
-    for_of_shim (JSON.parse(json.contents).languages, function(i)
-    {
-        lang_perc[lang_lut[i.language_name]] = parseInt(i.translated_strings / (i.translated_strings + i.untranslated_strings) * 100);
-
-        console.log(
-          i.language_code, i.language_name,
-          i.translated_strings, i.untranslated_strings,
-          lang_perc[lang_lut[i.language_name]] + '%'
-        );
-    })
-
-    console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
-
-    for_of_shim (document.querySelectorAll("#lang > li[lang]"), function(elem)
-    {
-      console.log(elem, elem.lang, lang_perc[elem.lang], elem.textContent, !!(elem.textContent.indexOf('%') !== -1))
-
-      /* swy: now they don't have a percentage by default; unless they need them */
-      if (lang_perc[elem.lang] < 100)
-        elem.innerHTML += '<span> (' + lang_perc[elem.lang] + '%)</span>';
-    })
-  });
+  /* new! update the translation percentages live with some trickery! */
+  shitty_json_req(
+    'https://api.allorigins.win/get?url=' + encodeURIComponent( /* swy: bypass cross-origin request limitations */
+    'https://www.transifex.com/_/userspace/ajax/widgets/languages/tld/tld/?all=1'), function(json)
+  {
+     lang_lut =
+     {
+                   'English': 'en',
+                   'Spanish': 'es',
+                   'Russian': 'ru',
+                  'Japanese': 'ja',
+                    'German': 'de',
+                    'French': 'fr',
+                   'Italian': 'it',
+                    'Polish': 'pl',
+                   'Turkish': 'tr',
+                   'Chinese': 'zh',
+                     'Czech': 'cz',
+                    'Korean': 'ko',
+                    'Slovak': 'sk',
+       'Portuguese (Brazil)': 'pt-BR',
+        'Chinese Simplified': 'zh-Hans',
+       'Chinese Traditional': 'zh-Hant'
+     }
+ 
+     window.lang_perc = {};
+     console.log("[i] returned JSON from Transifex:", json.contents, JSON.parse(json.contents));
+ 
+     /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
+     for_of_shim (JSON.parse(json.contents).languages, function(i)
+     {
+         lang_perc[lang_lut[i.language_name]] = parseInt(i.translated_strings / (i.translated_strings + i.untranslated_strings) * 100);
+ 
+         console.log(
+           i.language_code, i.language_name,
+           i.translated_strings, i.untranslated_strings,
+           lang_perc[lang_lut[i.language_name]] + '%'
+         );
+     })
+ 
+     console.log('[!!] the Transifex language completion stats have been retrieved and parsed:', lang_perc)
+ 
+     for_of_shim (document.querySelectorAll("#lang > li[lang]"), function(elem)
+     {
+       console.log(elem, elem.lang, lang_perc[elem.lang], elem.textContent, !!(elem.textContent.indexOf('%') !== -1))
+ 
+       /* swy: now they don't have a percentage by default; unless they need them */
+       if (lang_perc[elem.lang] < 100)
+         elem.innerHTML += '<span> (' + lang_perc[elem.lang] + '%)</span>';
+     })
+   });
  </script>
 </body>
 </html>
