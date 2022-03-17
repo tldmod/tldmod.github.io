@@ -671,11 +671,11 @@
        'Chinese Traditional': 'zh-Hant'
      }
  
-     window.lang_perc = {};
-     console.log("[i] returned JSON from Transifex:", json.contents, JSON.parse(json.contents));
+     window.lang_perc = {}; json_contents = JSON.parse(json.contents);
+     console.log("[i] returned JSON from Transifex:", json.contents, json_contents);
  
      /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
-     for_of_shim (JSON.parse(json.contents).languages, function(i)
+     for_of_shim (json_contents.languages, function(i)
      {
          lang_perc[lang_lut[i.language_name]] = parseInt(i.translated_strings / (i.translated_strings + i.untranslated_strings) * 100);
  
