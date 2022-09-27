@@ -378,6 +378,23 @@
     border-radius: 7px;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
   }
+  
+  ol li:before { /* swy: make the numeric list elements ordinals: https://stackoverflow.com/a/54982988/674685 */
+    counter-increment: item;
+    content: "th";
+    vertical-align: super;
+    text-anchor: end;
+    font-size: xx-small;
+    position: relative;
+    right: 8px;
+    top: 0px;
+    font-style: oblique;
+    display: inline-block;
+    margin-right: -1px;
+  }
+  ol li:nth-child(10n+1):not(:nth-child(11)):before { content: "st"; }
+  ol li:nth-child(10n+2):not(:nth-child(12)):before { content: "nd"; margin-right: -7px; }
+  ol li:nth-child(10n+3):not(:nth-child(13)):before { content: "rd"; }
  </style>
 </head>
 <body role=main>
