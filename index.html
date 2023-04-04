@@ -582,14 +582,15 @@
     document.documentElement.classList.add('mac');
   
   /* swyter-- tiny custom made json callback, don't judge me :) */
-  function shitty_json_req(url, callback)
+  function shitty_json_req(url, callback, is_raw)
   {
     xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
+    if (!is_raw)
+      xhr.responseType = 'json';
     xhr.open('GET', url);
     xhr.addEventListener('loadend', function(e)
     {
-      if (e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
+      if (!is_raw && e.target.responseType != 'json') /* swy: incompatible browsers reset this back to '' */
         if (console.log("[w] manually parsing JSON response as fallback:", e.target))
           e.target.response = JSON.parse(e.target.responseText);
 
@@ -638,7 +639,7 @@
         window.wb_date = cur_date;
         window.wb_href = cur_href;
       }
-    })
+    }, false)
     
     console.log("Finished!\n--");
 
@@ -675,8 +676,8 @@
 
   /* new! update the translation percentages live with some trickery! */
   shitty_json_req(
-    'https://api.allorigins.win/get?url=' + encodeURIComponent( /* swy: bypass cross-origin request limitations */
-    'https://transifex.com/tld/tld/'), function(json)
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent( /* swy: bypass cross-origin request limitations */
+    'https://transifex.com/tld/tld/'), function(embedded_html)
   {
      lang_lut =
      {
@@ -698,7 +699,7 @@
        'Chinese Traditional': 'zh-Hant'
      }
  
-     embedded_html_json = json.contents.split("<script id")[1].split(">")[1].split("</script")[0]; /* swy: they embed the JSON page data of the project preview as a script element; they break their pages more than I do, I don't care */
+     embedded_html_json = embedded_html.split("<script id")[1].split(">")[1].split("</script")[0];
      window.lang_perc = {}; json_contents = JSON.parse(embedded_html_json);
      console.log("[i] returned JSON from Transifex:", embedded_html_json, json_contents);
  
@@ -723,7 +724,7 @@
        if (lang_perc[elem.lang] < 100)
          elem.innerHTML += '<span> (' + lang_perc[elem.lang] + '%)</span>';
      })
-   });
+   }, true);
  </script>
 </body>
 </html>
