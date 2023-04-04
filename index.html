@@ -676,7 +676,7 @@
   /* new! update the translation percentages live with some trickery! */
   shitty_json_req(
     'https://api.allorigins.win/get?url=' + encodeURIComponent( /* swy: bypass cross-origin request limitations */
-    'https://www.transifex.com/_/userspace/ajax/widgets/languages/tld/tld/?all=1'), function(json)
+    'https://transifex.com/tld/tld/'), function(json)
   {
      lang_lut =
      {
@@ -698,18 +698,18 @@
        'Chinese Traditional': 'zh-Hant'
      }
  
-     window.lang_perc = {}; json_contents = JSON.parse(json.contents);
-     console.log("[i] returned JSON from Transifex:", json.contents, json_contents);
+     embedded_html_json = json.contents.split("<script id")[1].split(">")[1].split("</script")[0]; /* swy: they embed the JSON page data of the project preview as a script element; they break their pages more than I do, I don't care */
+     window.lang_perc = {}; json_contents = JSON.parse(embedded_html_json);
+     console.log("[i] returned JSON from Transifex:", embedded_html_json, json_contents);
  
      /* swy: pretty, huh? i know! :( fight hacks with hacks! >:) */
-     for_of_shim (json_contents.languages, function(i)
+     for_of_shim (json_contents.props.pageProps.data.languages, function(i)
      {
-         lang_perc[lang_lut[i.language_name]] = parseInt(i.translated_strings / (i.translated_strings + i.untranslated_strings) * 100);
+         lang_perc[lang_lut[i.name]] = i.translated_perc;
  
          console.log(
-           i.language_code, i.language_name,
-           i.translated_strings, i.untranslated_strings,
-           lang_perc[lang_lut[i.language_name]] + '%'
+           i.code, i.name,
+           lang_perc[lang_lut[i.name]] + '%'
          );
      })
  
