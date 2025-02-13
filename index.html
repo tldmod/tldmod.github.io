@@ -614,7 +614,7 @@
   }
 
   /* here's the real meal V */
-  shitty_json_req('https://api.bitbucket.org/2.0/repositories/Swyter/tld-downloads/downloads', function(json)
+  shitty_json_req('https://api.github.com/repos/tldmod/tldmod-downloads/releases', function(json)
   {
     console.log("Starting to scrape the TLD downloads page & table!\n", json);
 
@@ -622,10 +622,10 @@
     window.mb_date = new Date("1992-01-01");
     window.wb_date = new Date("1992-01-01");
 
-    for_of_shim (json.values, function(entry)
+    for_of_shim (json[0].assets, function(entry)
     {
-      var cur_date = new Date(entry.created_on);
-      var cur_href = entry.links.self.href;
+      var cur_date = new Date(entry.created_at);
+      var cur_href = entry.browser_download_url;
 
       /* mab1011 link? */
       if (cur_href.indexOf("TLD_3.6_nightly_patch_") != -1 && +cur_date > +window.mb_date)
@@ -661,11 +661,11 @@
                                                                    ( '0' +      wb_date.getDate()   ).substr(-2);
 
       /* replace the static links with the latest scrapped ones */
-      document.getElementById("nightly_link_mab1011_bb").href = mb_href.trim();
-      document.getElementById("nightly_link_warband_bb").href = wb_href.trim();
-
-      document.getElementById("nightly_link_mab1011_gh").href = 'https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/' + mb_href.trim().split('/').pop();
-      document.getElementById("nightly_link_warband_gh").href = 'https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/' + wb_href.trim().split('/').pop();
+      document.getElementById("nightly_link_mab1011_gh").href = mb_href.trim();
+      document.getElementById("nightly_link_warband_gh").href = wb_href.trim();
+	  
+      document.getElementById("nightly_link_mab1011_bb").href = 'https://api.bitbucket.org/2.0/repositories/swyter/tld-downloads/downloads/' + mb_href.trim().split('/').pop();
+      document.getElementById("nightly_link_warband_bb").href = 'https://api.bitbucket.org/2.0/repositories/swyter/tld-downloads/downloads/' + wb_href.trim().split('/').pop();
     }
 
     else
