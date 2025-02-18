@@ -469,19 +469,19 @@
       </span>
     </li>
     <li>
-      Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2020/07/24 *checking*</em></if-wb><!--
-                                                                                     --><if-mb><em id=nightly_date_mab1011>2020/07/24 *checking*</em></if-mb>)
+      Latest nightly patch for <if-wb>Warband</if-wb><if-mb>M&amp;B 1.011</if-mb> (from <if-wb><em id=nightly_date_warband>2025-02-18 *checking*</em></if-wb><!--
+                                                                                     --><if-mb><em id=nightly_date_mab1011>2025-02-18 *checking*</em></if-mb>)
       <span>
         Download from
         <if-wb>
-          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_wb_nightly_patch_2023.02.04-16.12_r3784.7z                   id=nightly_link_warband_bb>Bitbucket</a> or
-          <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_wb_nightly_patch_2023.02.04-16.12_r3784.7z id=nightly_link_warband_gh>GitHub</a>
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_wb_nightly_patch_2025.02.18-20.36_r4194.7z                   id=nightly_link_warband_bb>Bitbucket</a> or
+          <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_wb_nightly_patch_2025.02.18-20.36_r4194.7z id=nightly_link_warband_gh>GitHub</a>
         </if-wb>
         <if-mb>
-          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_nightly_patch_2023.02.04-16.12_r3784.7z                   id=nightly_link_mab1011_bb>Bitbucket</a> or
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_nightly_patch_2025.02.18-20.36_r4194.7z                   id=nightly_link_mab1011_bb>Bitbucket</a> or
           <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_nightly_patch_2023.02.04-16.12_r3784.7z id=nightly_link_mab1011_gh>GitHub</a>
         </if-mb>
-        <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/ target=tab><em>(see more)</em></a>.
+        <a href=https://github.com/tldmod/tldmod-downloads/releases/tag/nightlies target=tab><em>(see more)</em></a>.
       </span>
     </li>
   </ol>
@@ -652,12 +652,12 @@
       /* probably a fine example of why js sucks,
          try to format dates in a compact way w/o ending churning out spaguetti code */
 
-      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + '/' +
-                                                                   ( '0' + (1 + mb_date.getMonth()) ).substr(-2) + '/' +
+      document.getElementById("nightly_date_mab1011").textContent =             mb_date.getFullYear()            + '-' +
+                                                                   ( '0' + (1 + mb_date.getMonth()) ).substr(-2) + '-' +
                                                                    ( '0' +      mb_date.getDate()   ).substr(-2);
 
-      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + '/' +
-                                                                   ( '0' + (1 + wb_date.getMonth()) ).substr(-2) + '/' +
+      document.getElementById("nightly_date_warband").textContent =             wb_date.getFullYear()            + '-' +
+                                                                   ( '0' + (1 + wb_date.getMonth()) ).substr(-2) + '-' +
                                                                    ( '0' +      wb_date.getDate()   ).substr(-2);
 
       /* replace the static links with the latest scrapped ones */
