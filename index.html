@@ -474,14 +474,14 @@
       <span>
         Download from
         <if-wb>
-          <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_wb_nightly_patch_2025.02.18-20.36_r4194.7z id=nightly_link_warband_gh>GitHub</a> or
-          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_wb_nightly_patch_2025.02.18-20.36_r4194.7z                   id=nightly_link_warband_bb>Bitbucket</a>
+          <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_wb_nightly_patch_2025.02.18-20.36_r4194.7z id=nightly_link_warband_gh>GitHub</a><!-- or
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_wb_nightly_patch_2025.02.18-20.36_r4194.7z                   id=nightly_link_warband_bb>Bitbucket</a-->
         </if-wb>
         <if-mb>
-          <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_nightly_patch_2023.02.04-16.12_r3784.7z id=nightly_link_mab1011_gh>GitHub</a> or
-          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_nightly_patch_2025.02.18-20.36_r4194.7z                   id=nightly_link_mab1011_bb>Bitbucket</a>
+          <a href=https://github.com/tldmod/tldmod-downloads/releases/download/nightlies/TLD_3.6_nightly_patch_2023.02.04-16.12_r3784.7z id=nightly_link_mab1011_gh>GitHub</a><!-- or
+          <a href=https://bitbucket.org/Swyter/tld-downloads/downloads/TLD_3.6_nightly_patch_2025.02.18-20.36_r4194.7z                   id=nightly_link_mab1011_bb>Bitbucket</a-->
         </if-mb>
-        <a href=https://github.com/tldmod/tldmod-downloads/releases/tag/nightlies target=tab><em>(see more)</em></a>.
+        <a href=https://github.com/tldmod/tldmod-downloads/releases target=tab><em>(see more)</em></a>.
       </span>
     </li>
   </ol>
@@ -668,9 +668,10 @@
       /* replace the static links with the latest scrapped ones */
       document.getElementById("nightly_link_mab1011_gh").href = mb_href.trim();
       document.getElementById("nightly_link_warband_gh").href = wb_href.trim();
-	  
-      document.getElementById("nightly_link_mab1011_bb").href = 'https://api.bitbucket.org/2.0/repositories/swyter/tld-downloads/downloads/' + mb_href.trim().split('/').pop();
-      document.getElementById("nightly_link_warband_bb").href = 'https://api.bitbucket.org/2.0/repositories/swyter/tld-downloads/downloads/' + wb_href.trim().split('/').pop();
+
+      /* swy: bitbucket returns the '402 Payment required' HTTP code since May 2025, just use GitHub for now, maybe have another backup in line eventually, just for contingency purposes :) */
+   // document.getElementById("nightly_link_mab1011_bb").href = 'https://api.bitbucket.org/2.0/repositories/swyter/tld-downloads/downloads/' + mb_href.trim().split('/').pop();
+   // document.getElementById("nightly_link_warband_bb").href = 'https://api.bitbucket.org/2.0/repositories/swyter/tld-downloads/downloads/' + wb_href.trim().split('/').pop();
     }
 
     else
